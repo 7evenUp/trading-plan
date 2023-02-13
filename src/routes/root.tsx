@@ -3,11 +3,10 @@ import { Sidebar } from "../components";
 
 const Root = () => {
   return (
-    <>
-      <h1>Hello, Trading Plan <strong>User</strong></h1>
+    <div className="flex w-screen min-h-screen">
       <Sidebar />
       <Outlet />
-    </>
+    </div>
   )
 }
 

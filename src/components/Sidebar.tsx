@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <>
+    <div className="bg-orange-300">
       <h1>Sidebar Trade Plan</h1>
       <nav>
         <ul>
@@ -48,7 +48,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-    </>
+    </div>
   );
 };
 

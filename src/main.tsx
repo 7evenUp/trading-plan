@@ -8,6 +8,7 @@ import {
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
 import Plan from './routes/plan';
+import PlanID from './routes/planId';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,12 @@ const router = createBrowserRouter([
       {
         path: "plan/",
         element: <Plan />,
+        children: [
+          {
+            path: ":planId",
+            element: <PlanID />
+          }
+        ]
       },
     ],
   },

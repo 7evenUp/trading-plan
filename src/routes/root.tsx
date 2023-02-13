@@ -1,11 +1,17 @@
-import { Outlet } from "react-router-dom";
-import { Sidebar } from "../components";
+import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Info, Sidebar } from "../components";
 
 const Root = () => {
+  const location = useLocation()
+  console.log('Current location are:', location)
   return (
     <div className="flex w-screen min-h-screen">
       <Sidebar />
-      <Outlet />
+      {location.pathname === '/' ? (
+        <Info />
+      ) : (
+        <Outlet />
+      )}
     </div>
   )
 }

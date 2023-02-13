@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="bg-orange-300">
+    <div className="bg-orange-300 p-4">
       <h1>Sidebar Trade Plan</h1>
       <nav>
         <ul>

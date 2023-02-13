@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":planId",
-            element: <PlanID />
+            element: <PlanID />,
           }
         ]
       },

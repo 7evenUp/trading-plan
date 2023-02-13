@@ -4,7 +4,7 @@ const PlanID = () => {
   const params = useParams()
   
   return (
-    <div className="bg-emerald-700 flex-1">
+    <div className="bg-emerald-700 flex-1 p-4">
       <h3>Plan ID: {params.planId}</h3>
     </div>
   )

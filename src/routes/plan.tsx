@@ -1,8 +1,17 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../redux/hooks'
+import { add } from '../redux/planSlice'
 
 const Plan = () => {
   const [isLeverage, setIsLeverage] = useState(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const onCreate = () => {
+    dispatch(add({title: 'title for plan', deposit: 138, goal: 12, risk: 2, leverage: 10}))
+    navigate('/plan/title-for-plan')
+  }
 
   return (
     <div className='bg-violet-800 flex-1 flex flex-row-reverse'>
@@ -49,7 +58,7 @@ const Plan = () => {
               <input id='leverage' placeholder='Leverage'/>
             </label>
           )}
-          <button type="button" className="bg-slate-400 rounded-full w-max px-4 py-1 self-center hover:bg-slate-500 active:bg-slate-600">
+          <button onClick={onCreate} type="button" className="bg-slate-400 rounded-full w-max px-4 py-1 self-center hover:bg-slate-500 active:bg-slate-600">
             + create
           </button>
         </form>

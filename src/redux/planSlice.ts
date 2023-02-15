@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface CounterState {
+export interface PlanState {
   title: string
   deposit: number
   goal: number
@@ -9,7 +9,7 @@ export interface CounterState {
   leverage?: number
 }
 
-const initialState: CounterState = {
+const initialState: PlanState = {
   title: '',
   deposit: 0,
   goal: 0,
@@ -20,7 +20,7 @@ export const planSlice = createSlice({
   name: 'plan',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<CounterState>) => {
+    add: (state, action: PayloadAction<PlanState>) => {
       state.title = action.payload.title
       state.deposit = action.payload.deposit
       state.goal = action.payload.goal

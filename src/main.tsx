@@ -5,10 +5,13 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Root from "./routes/root";
+import Root from "./routes/Root";
 import ErrorPage from "./error-page";
-import Plan from './routes/plan';
-import PlanID from './routes/planId';
+import Plan from './routes/Plan';
+import PlanID from './routes/PlanId';
+import Trades from './routes/Trades';
+import Settings from './routes/Settings';
+import Account from './routes/Account';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
           }
         ]
       },
+      {
+        path: "trades/",
+        element: <Trades />,
+      },
+      {
+        path: "settings/",
+        element: <Settings />,
+      },
+      {
+        path: "account/",
+        element: <Account />,
+      }
     ],
   },
 ]);

@@ -23,16 +23,16 @@ const Plan = () => {
           </label>
           <div>
             <label htmlFor='lazy'>
-              Lazy
-              <input type="radio" id='lazy' name="risk" value={2.5}/>
+              1%
+              <input type="radio" id='lazy' name="risk" value={1}/>
             </label>
             <label htmlFor='active'>
-              Active
-              <input type="radio" id='active' name="risk" value={4}/>
+              2%
+              <input type="radio" id='active' name="risk" value={2}/>
             </label>
             <label htmlFor='full'>
-              Full-time
-              <input type="radio" id='full' name="risk" value={5.75}/>
+              5%
+              <input type="radio" id='full' name="risk" value={5}/>
             </label>
           </div>
           <label className="flex flex-col gap-1" htmlFor='date'>

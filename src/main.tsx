@@ -1,17 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/Root";
 import ErrorPage from "./error-page";
-import Plan from './routes/Plan';
-import PlanID from './routes/PlanId';
-import Trades from './routes/Trades';
-import Settings from './routes/Settings';
-import Account from './routes/Account';
+import Plan from "./routes/Plan";
+import PlanID from "./routes/PlanId";
+import Trades from "./routes/Trades";
+import Settings from "./routes/Settings";
+import Account from "./routes/Account";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const router = createBrowserRouter([
   {
@@ -26,8 +25,8 @@ const router = createBrowserRouter([
           {
             path: ":planId",
             element: <PlanID />,
-          }
-        ]
+          },
+        ],
       },
       {
         path: "trades/",
@@ -40,15 +39,15 @@ const router = createBrowserRouter([
       {
         path: "account/",
         element: <Account />,
-      }
+      },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <React.StrictMode>
+    <Provider store={store}>
       <RouterProvider router={router} />
-    </React.StrictMode>
-  </React.StrictMode>,
-)
+    </Provider>
+  </React.StrictMode>
+);

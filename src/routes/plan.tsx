@@ -7,7 +7,12 @@ const plan = () => {
         <h2>Create a plan</h2>
         <form>
           <label htmlFor='name'>
+            Name for your plan
             <input id='name' placeholder='Name for your plan'/>
+          </label>
+          <label htmlFor='date'>
+            Choose date
+            <input id='date' type={'date'}/>
           </label>
         </form>
       </div>

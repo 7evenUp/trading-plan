@@ -3,7 +3,7 @@ import { HomeSimple, Presentation, GraphUp, Settings, User } from "iconoir-react
 
 const Sidebar = () => {
   return (
-    <div className="bg-orange-300 p-4">
+    <div className="bg-surfaceVariant p-4">
       <nav>
         <ul>
           <li>

@@ -1,4 +1,5 @@
 export { default as Sidebar } from './Sidebar'
 export { default as Info } from './Info'
 export { default as TextField } from './TextField'
-export { default as SegmentedButtons } from './SegmentedButtons'
+export { default as SegmentedButton } from './SegmentedButton'
+export { default as SegmentedButtonsContainer } from './SegmentedButtonsContainer'

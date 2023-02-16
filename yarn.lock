@@ -748,6 +748,11 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   dependencies:
     react-is "^16.7.0"
 
+iconoir-react@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/iconoir-react/-/iconoir-react-6.2.1.tgz#d4b224679d9cc89f269b6c976a22d5eaf93cdc41"
+  integrity sha512-KcVRNsgNSm8OoZDJPWH6xCa7qnZXweG6SswykINyGXl5ro/2TM7Taf1G8zr6usNnbxnYixOoPLz8G/5amxexvA==
+
 immer@^9.0.16:
   version "9.0.19"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.19.tgz#67fb97310555690b5f9cd8380d38fc0aabb6b38b"

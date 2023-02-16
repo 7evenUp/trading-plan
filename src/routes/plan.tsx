@@ -9,6 +9,7 @@ const Plan = () => {
   const [deposit, setDeposit] = useState("");
   const [goal, setGoal] = useState("");
   const [isLeverage, setIsLeverage] = useState(false);
+  const [leverage, setLeverage] = useState("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -27,17 +28,17 @@ const Plan = () => {
 
   return (
     <div className="bg-violet-800 flex flex-1 flex-row-reverse h-[90%]">
-      <div className="p-4 bg-slate-300">
+      <div className="p-6 bg-surface w-[320px] rounded-xl">
         <h2 className="text-3xl">Create a plan</h2>
         <form className="flex flex-col gap-4 mt-4">
           <TextField
-            label="Name for your plan"
+            label="Name for your strategy"
             name="name"
             value={planName}
             onChange={(evt) => setPlanName(evt.currentTarget.value)}
           />
           <TextField
-            label="Deposit"
+            label="Total Deposit"
             name="deposit"
             value={deposit}
             onChange={(evt) => setDeposit(evt.currentTarget.value)}
@@ -48,20 +49,21 @@ const Plan = () => {
             value={goal}
             onChange={(evt) => setGoal(evt.currentTarget.value)}
           />
-          <div>
-            <label htmlFor="lazy">
+          <div className="flex w-full">
+            <label htmlFor="lazy" className="flex-1 bg-gray-400 hover:bg-gray-500 first:rounded-l-full last:rounded-r-full">
               1%
               <input type="radio" id="lazy" name="risk" value={1} />
             </label>
-            <label htmlFor="active">
+            <label htmlFor="active" className="flex-1 bg-gray-400 hover:bg-gray-500 first:rounded-l-full last:rounded-r-full">
               2%
               <input type="radio" id="active" name="risk" value={2} />
             </label>
-            <label htmlFor="full">
+            <label htmlFor="full" className="flex-1 bg-gray-400 hover:bg-gray-500 first:rounded-l-full last:rounded-r-full">
               5%
               <input type="radio" id="full" name="risk" value={5} />
             </label>
           </div>
+          
           <label htmlFor="isLeverage">
             Will you use leverage?
             <input
@@ -72,10 +74,12 @@ const Plan = () => {
             />
           </label>
           {isLeverage && (
-            <label className="flex flex-col gap-1" htmlFor="leverage">
-              What is your leverage?
-              <input id="leverage" placeholder="Leverage" />
-            </label>
+            <TextField
+            label="What is your leverage?"
+            name="leverage"
+            value={leverage}
+            onChange={(evt) => setLeverage(evt.currentTarget.value)}
+          />
           )}
           <button
             onClick={onCreate}

@@ -18,8 +18,6 @@ const Plan = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("current location is", location.pathname);
-  console.log("Risk is:", risk);
 
   const onCreate = () => {
     dispatch(
@@ -57,35 +55,40 @@ const Plan = () => {
             value={goal}
             onChange={(evt) => setGoal(evt.currentTarget.value)}
           />
-          <SegmentedButtonsContainer>
-            <SegmentedButton
-              id="lazy"
-              label="1%"
-              name="risk"
-              value={1}
-              onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
-                setRisk(evt.target.value);
-              }}
-            />
-            <SegmentedButton
-              id="active"
-              label="2%"
-              name="risk"
-              value={2}
-              onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
-                setRisk(evt.target.value);
-              }}
-            />
-            <SegmentedButton
-              id="full"
-              label="5%"
-              name="risk"
-              value={5}
-              onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
-                setRisk(evt.target.value);
-              }}
-            />
-          </SegmentedButtonsContainer>
+          <div className="flex flex-col gap-1">
+            <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
+              Risk management
+            </span>
+            <SegmentedButtonsContainer>
+              <SegmentedButton
+                id="lazy"
+                label="1%"
+                name="risk"
+                value={1}
+                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                  setRisk(evt.target.value);
+                }}
+              />
+              <SegmentedButton
+                id="active"
+                label="2%"
+                name="risk"
+                value={2}
+                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                  setRisk(evt.target.value);
+                }}
+              />
+              <SegmentedButton
+                id="full"
+                label="5%"
+                name="risk"
+                value={5}
+                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                  setRisk(evt.target.value);
+                }}
+              />
+            </SegmentedButtonsContainer>
+          </div>
 
           <label htmlFor="isLeverage">
             Will you use leverage?

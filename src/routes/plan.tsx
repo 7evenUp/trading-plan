@@ -1,3 +1,4 @@
+import { AddCircle } from "iconoir-react";
 import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -6,6 +7,7 @@ import {
   Switch,
   TextField,
 } from "../components";
+import FilledButton from "../components/FilledButton";
 import { useAppDispatch } from "../redux/hooks";
 import { add } from "../redux/planSlice";
 
@@ -97,16 +99,6 @@ const Plan = () => {
             </span>
             <Switch checked={isLeverage} onChange={() => setIsLeverage(!isLeverage)} />
           </div>
-
-          {/* <label htmlFor="isLeverage">
-            Will you use leverage?
-            <input
-              id="isLeverage"
-              type={"checkbox"}
-              checked={isLeverage}
-              onChange={() => setIsLeverage(!isLeverage)}
-            />
-          </label>
           {isLeverage && (
             <TextField
               label="What is your leverage?"
@@ -114,14 +106,8 @@ const Plan = () => {
               value={leverage}
               onChange={(evt) => setLeverage(evt.currentTarget.value)}
             />
-          )} */}
-          <button
-            onClick={onCreate}
-            type="button"
-            className="bg-slate-400 rounded-full w-max px-4 py-1 self-center hover:bg-slate-500 active:bg-slate-600"
-          >
-            + create
-          </button>
+          )}
+          <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
         </form>
       </div>
 

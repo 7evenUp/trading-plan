@@ -14,7 +14,7 @@ const SegmentedButton = ({
   return (
     <div className="flex-1 flex group">
       <input
-        className={`appearance-none peer/${id}`}
+        className="appearance-none peer"
         type="radio"
         id={id}
         name={name}
@@ -23,10 +23,10 @@ const SegmentedButton = ({
       />
       <label
         htmlFor={id}
-        className={`flex-1 font-medium text-sm leading-5 tracking-[0.1px] py-2 text-onSurface text-center
-                 peer-checked/${id}:text-onPrimaryContainer peer-checked/${id}:bg-primaryContainer
-                 hover:bg-surfaceVariant transition-all
-                  border-r border-outline group-first:rounded-l-full group-last:rounded-r-full group-last:border-r-0`}
+        className="flex-1 font-medium text-sm leading-5 tracking-[0.1px] py-2 text-onSurface text-center
+                 peer-checked:text-onPrimaryContainer peer-checked:bg-primaryContainer
+                 hover:bg-surfaceVariant active:bg-opacity-20 transition-all cursor-pointer
+                 border-outline border-r group-last:border-r-0 group-first:rounded-l-full group-last:rounded-r-full"
       >
         {label}
       </label>

@@ -65,7 +65,7 @@ const Plan = () => {
                 label="1%"
                 name="risk"
                 value={1}
-                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(evt) => {
                   setRisk(evt.target.value);
                 }}
               />
@@ -74,7 +74,7 @@ const Plan = () => {
                 label="2%"
                 name="risk"
                 value={2}
-                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(evt) => {
                   setRisk(evt.target.value);
                 }}
               />
@@ -83,7 +83,7 @@ const Plan = () => {
                 label="5%"
                 name="risk"
                 value={5}
-                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(evt) => {
                   setRisk(evt.target.value);
                 }}
               />

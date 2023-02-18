@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   SegmentedButton,
   SegmentedButtonsContainer,
+  Switch,
   TextField,
 } from "../components";
 import { useAppDispatch } from "../redux/hooks";
@@ -90,7 +91,14 @@ const Plan = () => {
             </SegmentedButtonsContainer>
           </div>
 
-          <label htmlFor="isLeverage">
+          <div className="w-full flex items-center justify-between">
+            <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
+              Risk management
+            </span>
+            <Switch checked={isLeverage} onChange={() => setIsLeverage(!isLeverage)} />
+          </div>
+
+          {/* <label htmlFor="isLeverage">
             Will you use leverage?
             <input
               id="isLeverage"
@@ -106,7 +114,7 @@ const Plan = () => {
               value={leverage}
               onChange={(evt) => setLeverage(evt.currentTarget.value)}
             />
-          )}
+          )} */}
           <button
             onClick={onCreate}
             type="button"

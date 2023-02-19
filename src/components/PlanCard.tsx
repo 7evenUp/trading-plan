@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { trim } from "../lib/trim";
 import { Plan } from "../redux/planSlice";
 
 const PlanCard = ({ plan }: { plan: Plan }) => {
@@ -8,11 +7,11 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
     <div
       className={`group bg-background rounded-xl w-full cursor-pointer
                         ${
-                          location.pathname === "/plan/" + trim(plan.title) &&
+                          location.pathname === "/plan/" + plan.id &&
                           "is-active ring-1 ring-outline"
                         }`}
       onClick={() => {
-        navigate(`/plan/${trim(plan.title)}`);
+        navigate(`/plan/${plan.id}`);
       }}
     >
       <header className="group-[.is-active]:bg-primary group-[.is-active]:bg-opacity-40 rounded-t-xl flex items-center justify-between p-4 bg-surfaceVariant bg-opacity-40">

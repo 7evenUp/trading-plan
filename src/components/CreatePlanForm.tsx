@@ -25,6 +25,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
   const onCreate = () => {
     dispatch(
       add({
+        id: trim(name),
         title: name,
         deposit: parseInt(deposit),
         goal: parseInt(goal),

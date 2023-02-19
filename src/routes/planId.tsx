@@ -3,8 +3,6 @@ import { useAppSelector } from "../redux/hooks"
 
 const PlanID = () => {
   const params = useParams()
-  const title = useAppSelector(state => state.plans[0].title)
-  const deposit = useAppSelector(state => state.plans[0].deposit)
   const plans = useAppSelector((state) => state.plans)
   
   return (

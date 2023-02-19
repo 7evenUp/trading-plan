@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export type Plan = {
+  id: string
   title: string
   deposit: number
   goal: number
@@ -12,7 +13,8 @@ export type Plan = {
 export type PlanState = Plan[]
 
 const initialState: PlanState = [
-  {
+  { 
+    id: 'my-new-strategy',
     title: 'My new strategy',
     deposit: 1000,
     goal: 500,
@@ -20,6 +22,7 @@ const initialState: PlanState = [
     leverage: 10
   },
   {
+    id: 'trading-stocks',
     title: 'Trading stocks',
     deposit: 10000,
     goal: 1000,
@@ -33,6 +36,7 @@ export const planSlice = createSlice({
   reducers: {
     add: (state, action: PayloadAction<Plan>) => {
       const newPlan = {
+        id: action.payload.id,
         title: action.payload.title,
         deposit: action.payload.deposit,
         goal: action.payload.goal,

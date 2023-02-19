@@ -8,7 +8,8 @@ import {
   TextField,
 } from "../components";
 import FilledButton from "../components/FilledButton";
-import { useAppDispatch } from "../redux/hooks";
+import { trim } from "../lib/trim";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { add } from "../redux/planSlice";
 
 const Plan = () => {
@@ -17,22 +18,23 @@ const Plan = () => {
   const [goal, setGoal] = useState("");
   const [risk, setRisk] = useState("");
   const [isLeverage, setIsLeverage] = useState(false);
-  const [leverage, setLeverage] = useState("");
-  const dispatch = useAppDispatch();
+  const [leverage, setLeverage] = useState("10");
   const navigate = useNavigate();
   const location = useLocation();
+  const plans = useAppSelector((state) => state.plans)
+  const dispatch = useAppDispatch();
 
   const onCreate = () => {
     dispatch(
       add({
-        title: "title for plan",
-        deposit: 138,
-        goal: 12,
-        risk: 2,
-        leverage: 10,
+        title: planName,
+        deposit: parseInt(deposit),
+        goal: parseInt(goal),
+        risk: parseInt(risk),
+        leverage: parseInt(leverage),
       })
     );
-    navigate("/plan/title-for-plan");
+    navigate(`/plan/${trim(planName)}`);
   };
 
   return (
@@ -95,19 +97,35 @@ const Plan = () => {
 
           <div className="w-full flex items-center justify-between">
             <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
-              Risk management
+              Will you use leverage?
             </span>
-            <Switch checked={isLeverage} onChange={() => setIsLeverage(!isLeverage)} />
+            <Switch
+              checked={isLeverage}
+              onChange={() => setIsLeverage(!isLeverage)}
+            />
           </div>
           {isLeverage && (
-            <TextField
-              label="What is your leverage?"
-              name="leverage"
-              value={leverage}
-              onChange={(evt) => setLeverage(evt.currentTarget.value)}
-            />
+            <>
+              <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
+                Leverage is {leverage}X
+              </span>
+              <div className="relative flex">
+                <input
+                  className="relative appearance-none bg-primaryContainer rounded-full h-1 flex-1"
+                  type="range"
+                  min={2}
+                  max={25}
+                  value={leverage}
+                  onChange={(evt) => setLeverage(evt.target.value)}
+                />
+              </div>
+            </>
           )}
-          <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
+          <FilledButton
+            label="create"
+            onClick={onCreate}
+            icon={<AddCircle />}
+          />
         </form>
       </div>
 

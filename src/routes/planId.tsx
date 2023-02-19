@@ -3,8 +3,8 @@ import { useAppSelector } from "../redux/hooks"
 
 const PlanID = () => {
   const params = useParams()
-  const title = useAppSelector(state => state.plans.title)
-  const deposit = useAppSelector(state => state.plans.deposit)
+  const title = useAppSelector(state => state.plans[0].title)
+  const deposit = useAppSelector(state => state.plans[0].deposit)
   
   return (
     <div className="bg-emerald-700 flex-1 p-4">

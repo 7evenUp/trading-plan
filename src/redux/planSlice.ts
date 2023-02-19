@@ -11,7 +11,21 @@ export type Plan = {
 
 export type PlanState = Plan[]
 
-const initialState: PlanState = []
+const initialState: PlanState = [
+  {
+    title: 'My new strategy',
+    deposit: 1000,
+    goal: 500,
+    risk: 5,
+    leverage: 10
+  },
+  {
+    title: 'Trading stocks',
+    deposit: 10000,
+    goal: 1000,
+    risk: 1
+  },
+]
 
 export const planSlice = createSlice({
   name: 'plan',

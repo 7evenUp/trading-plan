@@ -9,7 +9,7 @@ const SegmentedButton = ({
   label: string;
   id: string;
   name: string;
-  value: number;
+  value: string;
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean
 }) => {

@@ -29,7 +29,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
         title: name,
         deposit: parseInt(deposit),
         goal: parseInt(goal),
-        risk: parseInt(risk),
+        risk: parseFloat(risk),
         leverage: isLeverage ? parseInt(leverage) : undefined,
       })
     );
@@ -68,7 +68,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
               id="lazy"
               label="1%"
               name="risk"
-              value={1}
+              value='1'
               onChange={(evt) => {
                 setRisk(evt.target.value);
               }}
@@ -77,7 +77,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
               id="active"
               label="2%"
               name="risk"
-              value={2}
+              value='2'
               onChange={(evt) => {
                 setRisk(evt.target.value);
               }}
@@ -86,7 +86,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
               id="full"
               label="5%"
               name="risk"
-              value={5}
+              value='5'
               onChange={(evt) => {
                 setRisk(evt.target.value);
               }}

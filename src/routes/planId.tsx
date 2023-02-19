@@ -10,6 +10,8 @@ const PlanID = () => {
     state.plans.find((plan) => plan.id === planId)
   );
 
+  const onActivityChange = (evt: React.ChangeEvent<HTMLInputElement>) => setActivity(parseInt(evt.target.value))
+
   return (
     <div className="bg-surface rounded-t-3xl flex-1 flex flex-col p-6">
       {plan && (
@@ -22,7 +24,7 @@ const PlanID = () => {
               label="Lazy"
               name="activity"
               value={2.5}
-              onChange={(evt) => setActivity(parseInt(evt.target.value))}
+              onChange={onActivityChange}
             />
             <SegmentedButton
               id="active"
@@ -30,14 +32,14 @@ const PlanID = () => {
               name="activity"
               value={4}
               checked={activity === 4}
-              onChange={(evt) => setActivity(parseInt(evt.target.value))}
+              onChange={onActivityChange}
             />
             <SegmentedButton
               id="full"
               label="Full-time"
               name="activity"
               value={5.75}
-              onChange={(evt) => setActivity(parseInt(evt.target.value))}
+              onChange={onActivityChange}
             />
           </SegmentedButtonsContainer>
           <span>Title: {plan.title}</span>

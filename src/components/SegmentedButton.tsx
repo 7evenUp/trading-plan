@@ -4,12 +4,14 @@ const SegmentedButton = ({
   name,
   value,
   onChange,
+  checked
 }: {
   label: string;
   id: string;
   name: string;
   value: number;
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  checked?: boolean
 }) => {
   return (
     <div className="flex-1 flex group">
@@ -20,6 +22,7 @@ const SegmentedButton = ({
         name={name}
         value={value}
         onChange={onChange}
+        checked={checked}
       />
       <label
         htmlFor={id}

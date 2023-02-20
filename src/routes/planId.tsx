@@ -6,13 +6,24 @@ import { Plan } from "../redux/planSlice";
 import { selectDailyPNLNeeded, selectPlanById } from "../redux/selectors";
 
 const DAYS_IN_WEEK = 7
+const ACTIVITY_STATES = {
+  lazy: 2.5,
+  active: 4,
+  fullTime: 5.75
+}
+const DURATION_STATES_IN_MONTHS = {
+  one: 30,
+  three: 91,
+  six: 182,
+  twelve: 365
+}
 
 const PlanID = () => {
-  const [activity, setActivity] = useState(4);
-  const [duration, setDuration] = useState(182)
+  const [activity, setActivity] = useState(ACTIVITY_STATES.active);
+  const [duration, setDuration] = useState(DURATION_STATES_IN_MONTHS.six)
   const totalTradingDays = Math.floor(duration * (activity / DAYS_IN_WEEK))
   const { planId } = useParams();
-  
+
   let plan: Plan | undefined
   if (planId !== undefined) {
     plan = useAppSelector(state => selectPlanById(state, planId))
@@ -33,22 +44,22 @@ const PlanID = () => {
               id="lazy"
               label="Lazy"
               name="activity"
-              value='2.5'
+              value={ACTIVITY_STATES.lazy.toString()}
               onChange={onActivityChange}
             />
             <SegmentedButton
               id="active"
               label="Active"
               name="activity"
-              value='4'
-              checked={activity === 4}
+              value={ACTIVITY_STATES.active.toString()}
+              checked={activity === ACTIVITY_STATES.active}
               onChange={onActivityChange}
             />
             <SegmentedButton
               id="full"
               label="Full-time"
               name="activity"
-              value='5.75'
+              value={ACTIVITY_STATES.fullTime.toString()}
               onChange={onActivityChange}
             />
           </SegmentedButtonsContainer>
@@ -58,29 +69,29 @@ const PlanID = () => {
               id="one"
               label="1"
               name="duration"
-              value='30'
+              value={DURATION_STATES_IN_MONTHS.one.toString()}
               onChange={onDurationChange}
             />
             <SegmentedButton
               id="three"
               label="3"
               name="duration"
-              value='91'
+              value={DURATION_STATES_IN_MONTHS.three.toString()}
               onChange={onDurationChange}
             />
             <SegmentedButton
               id="six"
               label="6"
               name="duration"
-              value='182'
-              checked={duration === 182}
+              value={DURATION_STATES_IN_MONTHS.six.toString()}
+              checked={duration === DURATION_STATES_IN_MONTHS.six}
               onChange={onDurationChange}
             />
             <SegmentedButton
               id="twelve"
               label="12"
               name="duration"
-              value='365'
+              value={DURATION_STATES_IN_MONTHS.twelve.toString()}
               onChange={onDurationChange}
             />
           </SegmentedButtonsContainer>

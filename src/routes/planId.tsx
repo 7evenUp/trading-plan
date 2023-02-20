@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SegmentedButton, SegmentedButtonsContainer } from "../components";
 import { useAppSelector } from "../redux/hooks";
+import { Plan } from "../redux/planSlice";
+import { selectDailyPNLNeeded, selectPlanById } from "../redux/selectors";
 
 const DAYS_IN_WEEK = 7
 
@@ -10,9 +12,12 @@ const PlanID = () => {
   const [duration, setDuration] = useState(182)
   const totalTradingDays = Math.floor(duration * (activity / DAYS_IN_WEEK))
   const { planId } = useParams();
-  const plan = useAppSelector((state) =>
-    state.plans.find((plan) => plan.id === planId)
-  );
+  
+  let plan: Plan | undefined
+  if (planId !== undefined) {
+    plan = useAppSelector(state => selectPlanById(state, planId))
+  }
+  const dailyPNLNeeded = useAppSelector(state => selectDailyPNLNeeded(state, plan?.id, totalTradingDays))
 
   const onActivityChange = (evt: ChangeEvent<HTMLInputElement>) => setActivity(parseFloat(evt.target.value))
   const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) => setDuration(parseFloat(evt.target.value))
@@ -87,7 +92,7 @@ const PlanID = () => {
             </div>
             <div className="flex justify-between">
               <span>Needed PNL per day</span>
-              <span>25.92$</span>
+              <span>{dailyPNLNeeded}$</span>
             </div>
             <div className="flex justify-between">
               <span>Total successful trades per day</span>

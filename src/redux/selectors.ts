@@ -15,7 +15,7 @@ export const selectTradesPerDay = createSelector(
   [selectPlanById, (_, __, dailyPNLNeeded: number) => dailyPNLNeeded],
   (plan, dailyPNLNeeded) => {
     const moneyPerTradeAccordingToRisk = (plan!.deposit * plan!.risk) / 100;
-    const moneyAccordingToTP = (moneyPerTradeAccordingToRisk * 3) / 100;
+    const moneyAccordingToTP = (moneyPerTradeAccordingToRisk * 3) / 100; // number "3" is the percent of take profit
     return Math.ceil(dailyPNLNeeded / moneyAccordingToTP);
   }
 );

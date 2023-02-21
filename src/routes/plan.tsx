@@ -7,10 +7,9 @@ const Plan = () => {
   const [isCreatingMode, setIsCreatingMode] = useState(true);
   const location = useLocation();
   const plans = useAppSelector((state) => state.plans);
-  
 
   useEffect(() => {
-    if (plans) setIsCreatingMode(false);
+    if (plans.length) setIsCreatingMode(false);
   }, []);
 
   return (

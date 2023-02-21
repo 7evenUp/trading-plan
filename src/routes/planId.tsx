@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { SegmentedButton, SegmentedButtonsContainer } from "../components";
 import { useAppSelector } from "../redux/hooks";
 import { Plan } from "../redux/planSlice";
-import { selectDailyPNLNeeded, selectPlanById } from "../redux/selectors";
+import { selectDailyPNLNeeded, selectPlanById, selectTradesPerDay } from "../redux/selectors";
 
 const DAYS_IN_WEEK = 7;
 const ACTIVITY_STATES = {
@@ -32,14 +32,24 @@ const PlanID = () => {
     selectDailyPNLNeeded(state, plan?.id, totalTradingDays)
   );
 
+  const dailyTradesNeeded = useAppSelector((state) => selectTradesPerDay(state, plan?.id, parseFloat(dailyPNLNeeded)))
+  const PNLPerTradeNeeded = (parseFloat(dailyPNLNeeded) / dailyTradesNeeded).toFixed(2)
+
+  console.log('==============')
+  console.log(dailyPNLNeeded)
+  console.log(dailyTradesNeeded)
+  console.log((parseFloat(dailyPNLNeeded) / dailyTradesNeeded).toFixed(2))
+  console.log(PNLPerTradeNeeded)
+
   const onActivityChange = (evt: ChangeEvent<HTMLInputElement>) =>
     setActivity(parseFloat(evt.target.value));
   const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) =>
     setDuration(parseFloat(evt.target.value));
 
   return (
-    <div className="bg-surface rounded-t-3xl flex-1 flex flex-col p-6">
+    <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6">
       {plan && (
+        <>
         <div className="flex flex-col items-center gap-6 rounded-3xl bg-surfaceVariant bg-opacity-20 w-[450px] p-6">
           <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
             Needed PNL for achieving your goals in Months
@@ -122,22 +132,21 @@ const PlanID = () => {
               <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">
                 Total successful trades per day
               </span>
-              <div className="flex gap-3 m-auto text-sm tracking-[0.1px] font-medium text-onSurfaceVariant">
-                <span className="bg-surfaceVariant py-[6px] px-2 rounded-full min-w-[60px] text-center">19</span>
-                <span className="bg-surfaceVariant py-[6px] px-2 rounded-full min-w-[60px] text-center">7</span>
-                <span className="bg-surfaceVariant py-[6px] px-2 rounded-full min-w-[60px] text-center">4</span>
-              </div>
+              <span className="text-[22px] leading-7 text-onSurfaceVariant m-auto">{dailyTradesNeeded} trades</span>
             </div>
             <div className="flex justify-between p-4">
               <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">Needed PNL per trade</span>
-              <div className="flex gap-3 m-auto text-sm tracking-[0.1px] font-medium text-onSurfaceVariant">
-                <span className="bg-surfaceVariant py-[6px] px-2 rounded-full min-w-[60px] text-center">2.76$</span>
-                <span className="bg-surfaceVariant py-[6px] px-2 rounded-full min-w-[60px] text-center">846.28$</span>
-                <span className="bg-surfaceVariant py-[6px] px-2 rounded-full min-w-[60px] text-center">13.8$</span>
-              </div>
+              <span className="text-[22px] leading-7 text-onSurfaceVariant m-auto">{PNLPerTradeNeeded}$</span>
             </div>
           </div>
         </div>
+
+        <div className="flex flex-col max-w-[250px] gap-2">
+          <h3>Amount of money per trade according to risk management</h3>
+          <span>Risk is: {plan.risk}%</span>
+          <span>Trade volume: {(plan.deposit * plan.risk / 100).toFixed(2)}$</span>
+        </div>
+        </>
       )}
     </div>
   );

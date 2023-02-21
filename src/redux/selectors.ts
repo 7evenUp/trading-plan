@@ -7,11 +7,15 @@ export const selectPlanById = createSelector(
 );
 
 export const selectDailyPNLNeeded = createSelector(
-  [
-    (state: RootState) => state.plans,
-    (_, id: string) => id,
-    (_, __, totalTradingDays: number) => totalTradingDays,
-  ],
-  (plans, id, totalTradingDays) =>
-    (plans.find((plan) => plan.id === id)!.goal / totalTradingDays).toFixed(2)
+  [selectPlanById, (_, __, totalTradingDays: number) => totalTradingDays],
+  (plan, totalTradingDays) => (plan!.goal / totalTradingDays).toFixed(2)
+);
+
+export const selectTradesPerDay = createSelector(
+  [selectPlanById, (_, __, dailyPNLNeeded: number) => dailyPNLNeeded],
+  (plan, dailyPNLNeeded) => {
+    const moneyPerTradeAccordingToRisk = (plan!.deposit * plan!.risk) / 100;
+    const moneyAccordingToTP = (moneyPerTradeAccordingToRisk * 3) / 100;
+    return Math.ceil(dailyPNLNeeded / moneyAccordingToTP);
+  }
 );

@@ -94,16 +94,14 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
           <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
             Leverage is {leverage}X
           </span>
-          <div className="relative flex">
-            <input
-              className="relative appearance-none bg-primaryContainer rounded-full h-1 flex-1"
-              type="range"
-              min={1}
-              max={25}
-              value={leverage}
-              onChange={(evt) => setLeverage(evt.target.value)}
-            />
-          </div>
+          <input
+            className="appearance-none bg-primaryContainer rounded-full h-1 w-full"
+            type="range"
+            min={1}
+            max={25}
+            value={leverage}
+            onChange={(evt) => setLeverage(evt.target.value)}
+          />
         <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
       </form>
     </div>

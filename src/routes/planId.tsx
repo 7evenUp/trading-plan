@@ -32,8 +32,7 @@ const PlanID = () => {
 
   const plan = useAppSelector((state) => selectPlanById(state, planId));
 
-  let tradeVolume = ((plan.deposit * plan.risk) / 100)
-  if (plan.leverage) tradeVolume *= plan.leverage
+  const tradeVolume = ((plan.deposit * plan.risk) / 100) * plan.leverage
 
   const PNLPerDay = useAppSelector((state) => selectPNLPerDay(state, plan.id, totalTradingDays));
   const tradesPerDay = useAppSelector((state) => selectTradesPerDay(state, plan.id, parseFloat(PNLPerDay)));

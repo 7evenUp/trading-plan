@@ -38,8 +38,8 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
   };
 
   return (
-    <div className="p-6 bg-surface w-[320px] rounded-xl flex flex-col items-center gap-10 h-max">
-      <h2 className="text-[22px] leading-7">Create your first plan</h2>
+    <div className="w-full p-6 rounded-xl bg-surface">
+      <h2 className="text-[22px] leading-7 text-center mb-10">Create your first plan</h2>
       <form className="flex flex-col gap-4 w-full">
         <TextField
           label="Name for your strategy"

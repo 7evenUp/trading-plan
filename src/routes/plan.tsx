@@ -7,22 +7,33 @@ const Plan = () => {
   const [isCreatingMode, setIsCreatingMode] = useState(true);
   const location = useLocation();
   const plans = useAppSelector((state) => state.plans);
+  const isPlansEmpty = !plans.length;
+
+  const toggleCreatingMode = () => setIsCreatingMode(!isCreatingMode);
 
   useEffect(() => {
-    if (plans.length) setIsCreatingMode(false);
+    if (!isPlansEmpty) toggleCreatingMode();
   }, []);
 
   return (
-    <div className="bg-surfaceVariant flex flex-1 flex-row-reverse gap-6 h-[90%]">
-      {isCreatingMode ? (
-        <CreatePlanForm closeForm={() => setIsCreatingMode(false)} />
-      ) : (
-        <div className="w-[320px] rounded-xl items-center gap-6 h-max flex flex-col">
-          {plans.map((plan, i) => (
-            <PlanCard key={i} plan={plan} />
-          ))}
-        </div>
-      )}
+    <div className="flex flex-1 flex-row-reverse gap-6 h-[90%] bg-surfaceVariant">
+      <div className="flex flex-col gap-6 w-[320px] h-max relative">
+        {isCreatingMode ? (
+          !isPlansEmpty && (
+            <SidebarHeading
+              title="Back to plans"
+              onClick={toggleCreatingMode}
+            />
+          )
+        ) : (
+          <SidebarHeading title="Add new plan" onClick={toggleCreatingMode} />
+        )}
+        {isCreatingMode ? (
+          <CreatePlanForm closeForm={toggleCreatingMode} />
+        ) : (
+          plans.map((plan) => <PlanCard key={plan.id} plan={plan} />)
+        )}
+      </div>
 
       {location.pathname === "/plan" ? (
         <div className="bg-surface rounded-t-3xl flex-1 flex flex-col items-center justify-center text-[32px] leading-10">
@@ -41,5 +52,17 @@ const Plan = () => {
     </div>
   );
 };
+
+const SidebarHeading = ({
+  title,
+  onClick,
+}: {
+  title: string;
+  onClick: () => void;
+}) => (
+  <button className="absolute left-4 -top-10" type="button" onClick={onClick}>
+    {title}
+  </button>
+);
 
 export default Plan;

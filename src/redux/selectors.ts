@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { Plan } from "./planSlice";
 import { RootState } from "./store";
 
 export const selectPlanById = createSelector(
@@ -8,14 +7,9 @@ export const selectPlanById = createSelector(
 );
 
 export const selectDailyPNLNeeded = createSelector(
-  [selectPlanById, (_, id: string, totalTradingDays: number) => totalTradingDays],
+  [selectPlanById, (_, __, totalTradingDays: number) => totalTradingDays],
   (plan, totalTradingDays) => (plan!.goal / totalTradingDays).toFixed(2)
 );
-
-// export const selectDailyPNLNeeded = createSelector(
-//   [(plan: Plan) => plan, (_, totalTradingDays: number) => totalTradingDays],
-//   (plan, totalTradingDays) => (plan!.goal / totalTradingDays).toFixed(2)
-// );
 
 export const selectTradesPerDay = createSelector(
   [selectPlanById, (_, __, dailyPNLNeeded: number) => dailyPNLNeeded],

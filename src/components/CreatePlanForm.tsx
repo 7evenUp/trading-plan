@@ -7,7 +7,6 @@ import { add } from "../redux/planSlice";
 import FilledButton from "./FilledButton";
 import SegmentedButton from "./SegmentedButton";
 import SegmentedButtonsContainer from "./SegmentedButtonsContainer";
-import Switch from "./Switch";
 import TextField from "./TextField";
 
 const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
@@ -15,8 +14,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
   const [deposit, setDeposit] = useState("");
   const [goal, setGoal] = useState("");
   const [risk, setRisk] = useState("");
-  const [isLeverage, setIsLeverage] = useState(false);
-  const [leverage, setLeverage] = useState("10");
+  const [leverage, setLeverage] = useState("1");
 
   const navigate = useNavigate();
 
@@ -30,7 +28,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
         deposit: parseInt(deposit),
         goal: parseInt(goal),
         risk: parseFloat(risk),
-        leverage: isLeverage ? parseInt(leverage) : undefined,
+        leverage: parseInt(leverage),
       })
     );
     closeForm()
@@ -93,33 +91,19 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
             />
           </SegmentedButtonsContainer>
         </div>
-
-        <div className="w-full flex items-center justify-between">
           <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
-            Will you use leverage?
+            Leverage is {leverage}X
           </span>
-          <Switch
-            checked={isLeverage}
-            onChange={() => setIsLeverage(!isLeverage)}
-          />
-        </div>
-        {isLeverage && (
-          <>
-            <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
-              Leverage is {leverage}X
-            </span>
-            <div className="relative flex">
-              <input
-                className="relative appearance-none bg-primaryContainer rounded-full h-1 flex-1"
-                type="range"
-                min={2}
-                max={25}
-                value={leverage}
-                onChange={(evt) => setLeverage(evt.target.value)}
-              />
-            </div>
-          </>
-        )}
+          <div className="relative flex">
+            <input
+              className="relative appearance-none bg-primaryContainer rounded-full h-1 flex-1"
+              type="range"
+              min={1}
+              max={25}
+              value={leverage}
+              onChange={(evt) => setLeverage(evt.target.value)}
+            />
+          </div>
         <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
       </form>
     </div>

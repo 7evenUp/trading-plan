@@ -7,7 +7,7 @@ export type Plan = {
   deposit: number
   goal: number
   risk: number
-  leverage?: number
+  leverage: number
   takeProfit?: number | number[]
 }
 
@@ -29,6 +29,7 @@ const initialState: PlanState = [
     deposit: 10000,
     goal: 1000,
     risk: 1,
+    leverage: 1,
     takeProfit: 10
   },
 ]

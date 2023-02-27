@@ -15,9 +15,9 @@ const Tooltip = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered && (
-        <span className="absolute top-0 left-0 -translate-y-full w-[300px]
+        <span className="absolute top-0 left-0 -translate-y-full w-[250px]
                       bg-tertiaryContainer text-onTertiaryContainer p-2 rounded-lg
-                        text-sm tracking-[0.25px]">
+                        text-xs tracking-[0.4px] text-center">
           {title}
         </span>
       )}

@@ -39,10 +39,10 @@ const Plan = () => {
         <div className="bg-surface rounded-t-3xl flex-1 flex flex-col items-center justify-center text-[32px] leading-10">
           {isCreatingMode ? (
             isPlansEmpty ? (
-            <>
-              <span>Seems you don’t have any trading plan yet</span>
-              <span>Why don’t you create one?</span>
-            </>
+              <>
+                <span>Seems you don’t have any trading plan yet</span>
+                <span>Why don’t you create one?</span>
+              </>
             ) : (
               <span>Create new plan or come back and choose existing plan</span>
             )

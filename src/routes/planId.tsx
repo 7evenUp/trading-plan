@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SegmentedButton, SegmentedButtonsContainer } from "../components";
+import { SegmentedButton, SegmentedButtonsContainer, Tooltip } from "../components";
 import { useAppSelector } from "../redux/hooks";
 import {
   selectPNLPerDay,
@@ -49,9 +49,11 @@ const PlanID = () => {
           Needed PNL for achieving your goals in Months
         </h3>
         <div className="w-full flex flex-col items-center gap-2">
-          <span className="text-base tracking-[0.5px] text-onSurfaceVariant">
-            Select trading activity
-          </span>
+          <Tooltip title="This parameter calculates how many days per week are you going to trade.">
+            <span className="text-base tracking-[0.5px] text-onSurfaceVariant border-b border-dashed border-outline">
+              Select trading activity
+            </span>
+          </Tooltip>
           <SegmentedButtonsContainer>
             <SegmentedButton
               id="lazy"
@@ -79,9 +81,11 @@ const PlanID = () => {
         </div>
 
         <div className="w-full flex flex-col items-center gap-2">
-          <span className="text-base tracking-[0.5px] text-onSurfaceVariant">
-            Select expiration date goal in months
-          </span>
+          <Tooltip title="How many months do you want to chase your goal?">
+            <span className="text-base tracking-[0.5px] text-onSurfaceVariant border-b border-dashed border-outline">
+              Select expiration date goal in months
+            </span>
+          </Tooltip>
           <SegmentedButtonsContainer>
             <SegmentedButton
               id="one"

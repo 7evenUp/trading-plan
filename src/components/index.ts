@@ -6,3 +6,4 @@ export { default as SegmentedButtonsContainer } from './SegmentedButtonsContaine
 export { default as Switch } from './Switch'
 export { default as CreatePlanForm } from './CreatePlanForm'
 export { default as PlanCard } from './PlanCard'
+export { default as Tooltip } from './Tooltip'

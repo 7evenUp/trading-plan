@@ -37,8 +37,13 @@ const PlanID = () => {
 
   const PNLPerDay = useAppSelector((state) => selectPNLPerDay(state, plan.id, totalTradingDays));
   const tradesPerDay = useAppSelector((state) => selectTradesPerDay(state, plan.id, parseFloat(PNLPerDay)));
+  
+  let PNLsPerTradeNeeded = []
+  for (let trade of tradesPerDay) {
+    PNLsPerTradeNeeded.push((parseFloat(PNLPerDay) / trade).toFixed(2))
+  }
 
-  const PNLPerTradeNeeded = (parseFloat(PNLPerDay) / tradesPerDay).toFixed(2);
+  // const PNLPerTradeNeeded = (parseFloat(PNLPerDay) / tradesPerDay).toFixed(2);
 
   const onActivityChange = (evt: ChangeEvent<HTMLInputElement>) => setActivity(parseFloat(evt.target.value));
   const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) => setDuration(parseFloat(evt.target.value));
@@ -141,17 +146,19 @@ const PlanID = () => {
             <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">
               Total successful trades per day
             </span>
-            <span className="text-[22px] leading-7 text-onSurfaceVariant m-auto">
-              {tradesPerDay} trades
-            </span>
+            <div className="flex gap-2">
+              {tradesPerDay.map((trades, i) => 
+              <span key={i} className="text-[22px] leading-7 text-onSurfaceVariant m-auto">{trades}</span>)}
+            </div>
           </div>
           <div className="flex justify-between p-4">
             <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">
               Needed PNL per trade
             </span>
-            <span className="text-[22px] leading-7 text-onSurfaceVariant m-auto">
-              {PNLPerTradeNeeded}$
-            </span>
+            <div className="flex gap-2">
+            {PNLsPerTradeNeeded.map((pnlPerTrade, i) => 
+              <span key={i} className="text-[22px] leading-7 text-onSurfaceVariant m-auto">{pnlPerTrade}$</span>)}
+            </div>
           </div>
         </div>
       </div>
@@ -183,6 +190,15 @@ const PlanID = () => {
         <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
           <span>Leveraged trade volume: </span>
           <span>{tradeVolumeWithLeverage}$</span>
+        </div>
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>Take profit: </span>
+          <div className="flex gap-2">
+            {plan.takeProfit.map((tp, i) => (
+              <span key={i}>{tp}%</span>
+            ))}
+          </div>
+          
         </div>
       </div>
     </div>

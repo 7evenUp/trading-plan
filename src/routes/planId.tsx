@@ -32,7 +32,8 @@ const PlanID = () => {
 
   const plan = useAppSelector((state) => selectPlanById(state, planId));
 
-  const tradeVolume = ((plan.deposit * plan.risk) / 100) * plan.leverage
+  const tradeVolume = (plan.deposit * plan.risk) / 100
+  const tradeVolumeWithLeverage = tradeVolume * plan.leverage
 
   const PNLPerDay = useAppSelector((state) => selectPNLPerDay(state, plan.id, totalTradingDays));
   const tradesPerDay = useAppSelector((state) => selectTradesPerDay(state, plan.id, parseFloat(PNLPerDay)));
@@ -43,7 +44,7 @@ const PlanID = () => {
   const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) => setDuration(parseFloat(evt.target.value));
 
   return (
-    <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6">
+    <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6 gap-6">
       <div className="flex flex-col items-center gap-6 rounded-3xl bg-surfaceVariant bg-opacity-20 w-[450px] p-6">
         <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
           Needed PNL for achieving your goals in Months
@@ -155,12 +156,34 @@ const PlanID = () => {
         </div>
       </div>
 
-      <div className="flex flex-col max-w-[250px] gap-2">
-        <h3>Amount of money per trade according to risk management</h3>
-        <span>Risk is: {plan.risk}%</span>
-        <span>
-          Trade volume: {tradeVolume.toFixed(2)}$
-        </span>
+      <div className="flex flex-col items-center gap-6 rounded-3xl bg-surfaceVariant bg-opacity-20 flex-1 p-6">
+        <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
+          Total Info
+        </h3>
+        <div className="flex gap-4">
+          <span>Deposit: </span>
+          <span>{plan.deposit}$</span>
+        </div>
+        <div className="flex gap-4">
+          <span>Your goal: </span>
+          <span>{plan.goal}$</span>
+        </div>
+        <div className="flex gap-4">
+          <span>Your risk management: </span>
+          <span>{plan.risk}%</span>
+        </div>
+        <div className="flex gap-4">
+          <span>Your leverage: </span>
+          <span>{plan.leverage}X</span>
+        </div>
+        <div className="flex gap-4">
+          <span>Your trade volume: </span>
+          <span>{tradeVolume}$</span>
+        </div>
+        <div className="flex gap-4">
+          <span>Your trade volume according to leverage: </span>
+          <span>{tradeVolumeWithLeverage}$</span>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { AddCircle } from "iconoir-react";
+import { AddCircle, Check, Cancel } from "iconoir-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { trim } from "../lib/trim";
@@ -8,36 +8,44 @@ import FilledButton from "./FilledButton";
 import SegmentedButton from "./SegmentedButton";
 import SegmentedButtonsContainer from "./SegmentedButtonsContainer";
 import TextField from "./TextField";
+import Tooltip from "./Tooltip";
 
-const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
+const TP_MAX = 3;
+
+const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
   const [name, setPlanName] = useState("");
   const [deposit, setDeposit] = useState("");
   const [goal, setGoal] = useState("");
   const [risk, setRisk] = useState("");
   const [leverage, setLeverage] = useState("1");
+  const [tp, setTp] = useState("");
+  const [isTPCreating, setIsTPCreating] = useState(false);
+  const [tpArray, setTpArray] = useState<number[]>([]);
 
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
   const onCreate = () => {
-    dispatch(
-      add({
-        id: trim(name),
-        title: name,
-        deposit: parseInt(deposit),
-        goal: parseInt(goal),
-        risk: parseFloat(risk),
-        leverage: parseInt(leverage),
-      })
-    );
-    closeForm()
+    // dispatch(
+    //   add({
+    //     id: trim(name),
+    //     title: name.trim(),
+    //     deposit: parseInt(deposit),
+    //     goal: parseInt(goal),
+    //     risk: parseFloat(risk),
+    //     leverage: parseInt(leverage),
+    //   })
+    // );
+    closeForm();
     navigate(`/plan/${trim(name)}`);
   };
 
   return (
     <div className="w-full p-6 rounded-xl bg-surface">
-      <h2 className="text-[22px] leading-7 text-center mb-10">Create your first plan</h2>
+      <h2 className="text-[22px] leading-7 text-center mb-6">
+        Create your first plan
+      </h2>
       <form className="flex flex-col gap-4 w-full">
         <TextField
           label="Name for your strategy"
@@ -66,7 +74,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
               id="lazy"
               label="1%"
               name="risk"
-              value='1'
+              value="1"
               onChange={(evt) => {
                 setRisk(evt.target.value);
               }}
@@ -75,7 +83,7 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
               id="active"
               label="2%"
               name="risk"
-              value='2'
+              value="2"
               onChange={(evt) => {
                 setRisk(evt.target.value);
               }}
@@ -84,13 +92,14 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
               id="full"
               label="5%"
               name="risk"
-              value='5'
+              value="5"
               onChange={(evt) => {
                 setRisk(evt.target.value);
               }}
             />
           </SegmentedButtonsContainer>
         </div>
+        <div>
           <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
             Leverage is {leverage}X
           </span>
@@ -102,6 +111,70 @@ const CreatePlanForm = ({closeForm}: {closeForm: () => void}) => {
             value={leverage}
             onChange={(evt) => setLeverage(evt.target.value)}
           />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-6 items-center">
+            <Tooltip title="Take profit in %. For example for level breakdown it is from 0.4% up to 1%, for swing trading it is from 3% to 5-6%. Set TP as you usually trade. Default take profit is 5%">
+              <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px] border-b border-dashed border-outline">
+                TP strategy
+              </span>
+            </Tooltip>
+
+            <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
+              {tpArray.length}/{TP_MAX}
+            </span>
+            {isTPCreating ? (
+              <div className="ml-auto flex">
+                <Check
+                  className="cursor-pointer"
+                  width={20}
+                  height={20}
+                  onClick={() => {
+                    setTpArray([...tpArray, parseFloat(tp)]);
+                    setIsTPCreating(false);
+                    setTp("");
+                  }}
+                />
+                <Cancel
+                  className="cursor-pointer"
+                  width={20}
+                  height={20}
+                  onClick={() => {
+                    setIsTPCreating(false);
+                    setTp("");
+                  }}
+                />
+              </div>
+            ) : (
+              <AddCircle
+                className="ml-auto cursor-pointer"
+                width={22}
+                height={22}
+                onClick={() => {
+                  setIsTPCreating(true);
+                }}
+              />
+            )}
+          </div>
+          <div className="flex gap-2">
+            {tpArray.map((tp, i) => (
+              <span key={i}>{tp}%</span>
+            ))}
+          </div>
+          {isTPCreating && (
+            <input
+              className="text-onSurface bg-transparent outline-none text-base leading-6 tracking-[0.5px] border-b border-outline"
+              min={0.1}
+              max={100}
+              step={0.1}
+              type={"number"}
+              value={tp}
+              onChange={(evt) => setTp(evt.currentTarget.value)}
+              placeholder="Take profit"
+            />
+          )}
+        </div>
+
         <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
       </form>
     </div>

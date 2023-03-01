@@ -8,7 +8,7 @@ export type Plan = {
   goal: number
   risk: number
   leverage: number
-  takeProfit?: number | number[]
+  takeProfit: number[]
 }
 
 export type PlanState = Plan[]
@@ -30,7 +30,7 @@ const initialState: PlanState = [
     goal: 1000,
     risk: 1,
     leverage: 1,
-    takeProfit: 10
+    takeProfit: [10]
   },
 ]
 
@@ -39,13 +39,14 @@ export const planSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<Plan>) => {
-      const newPlan = {
+      const newPlan: Plan = {
         id: action.payload.id,
         title: action.payload.title,
         deposit: action.payload.deposit,
         goal: action.payload.goal,
         risk: action.payload.risk,
-        leverage: action.payload.leverage
+        leverage: action.payload.leverage,
+        takeProfit: action.payload.takeProfit
       }
       state.push(newPlan)
     }

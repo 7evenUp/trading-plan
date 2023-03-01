@@ -160,28 +160,28 @@ const PlanID = () => {
         <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
           Total Info
         </h3>
-        <div className="flex gap-4">
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
           <span>Deposit: </span>
-          <span>{plan.deposit}$</span>
+          <span className="flex">{plan.deposit}$</span>
         </div>
-        <div className="flex gap-4">
-          <span>Your goal: </span>
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>Goal: </span>
           <span>{plan.goal}$</span>
         </div>
-        <div className="flex gap-4">
-          <span>Your risk management: </span>
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>Risk management: </span>
           <span>{plan.risk}%</span>
         </div>
-        <div className="flex gap-4">
-          <span>Your leverage: </span>
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>Leverage: </span>
           <span>{plan.leverage}X</span>
         </div>
-        <div className="flex gap-4">
-          <span>Your trade volume: </span>
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>Trade volume: </span>
           <span>{tradeVolume}$</span>
         </div>
-        <div className="flex gap-4">
-          <span>Your trade volume according to leverage: </span>
+        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>Leveraged trade volume: </span>
           <span>{tradeVolumeWithLeverage}$</span>
         </div>
       </div>

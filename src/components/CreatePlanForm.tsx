@@ -2,7 +2,7 @@ import { AddCircle, Check, Cancel } from "iconoir-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { trim } from "../lib/trim";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { add } from "../redux/planSlice";
 import FilledButton from "./FilledButton";
 import SegmentedButton from "./SegmentedButton";
@@ -25,6 +25,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
 
   const navigate = useNavigate();
 
+  const plans = useAppSelector(state => state.plans)
   const dispatch = useAppDispatch();
 
   const onCreate = () => {
@@ -46,7 +47,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
   return (
     <div className="w-full p-6 rounded-xl bg-surface">
       <h2 className="text-[22px] leading-7 text-center mb-6">
-        Create your first plan
+        {plans.length ? 'Create new plan' : 'Create your first plan'}
       </h2>
       <form className="flex flex-col gap-4 w-full">
         <TextField

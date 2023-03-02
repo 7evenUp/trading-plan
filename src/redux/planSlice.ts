@@ -15,8 +15,8 @@ export type PlanState = Plan[]
 
 const initialState: PlanState = [
   { 
-    id: 'my-new-strategy',
-    title: 'My new strategy',
+    id: 'crypto-alts',
+    title: 'Crypto alts',
     deposit: 1000,
     goal: 500,
     risk: 5,

@@ -146,18 +146,18 @@ const PlanID = () => {
             <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">
               Total successful trades per day
             </span>
-            <div className="flex gap-2">
+            <div className="flex gap-2 m-auto">
               {tradesPerDay.map((trades, i) => 
-              <span key={i} className="text-[22px] leading-7 text-onSurfaceVariant m-auto">{trades}</span>)}
+              <span key={i} className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1">{trades}</span>)}
             </div>
           </div>
           <div className="flex justify-between p-4">
             <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">
               Needed PNL per trade
             </span>
-            <div className="flex gap-2">
+            <div className="flex gap-2 m-auto">
             {PNLsPerTradeNeeded.map((pnlPerTrade, i) => 
-              <span key={i} className="text-[22px] leading-7 text-onSurfaceVariant m-auto">{pnlPerTrade}$</span>)}
+              <span key={i} className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1">{pnlPerTrade}$</span>)}
             </div>
           </div>
         </div>

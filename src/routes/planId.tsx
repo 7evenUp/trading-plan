@@ -143,9 +143,12 @@ const PlanID = () => {
             </span>
           </div>
           <div className="flex justify-between p-4">
-            <span className="max-w-[110px] text-sm tracking-[0.25px] text-onSurfaceVariant">
+            <Tooltip className="max-w-[110px]" title={`According to your take profits: ${plan.takeProfit.join('%, ')}%`}>
+            <span className="text-sm tracking-[0.25px] text-onSurfaceVariant border-b border-dashed border-outline cursor-help">
               Total successful trades per day
             </span>
+            </Tooltip>
+            
             <div className="flex gap-2 m-auto">
               {tradesPerDay.map((trades, i) => 
               <span key={i} className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1">{trades}</span>)}

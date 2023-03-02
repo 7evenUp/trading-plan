@@ -3,14 +3,16 @@ import { useState } from "react";
 const Tooltip = ({
   title,
   children,
+  className
 }: {
   title: string;
   children: React.ReactNode;
+  className?: string
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
-      className="relative cursor-help"
+      className={`relative cursor-help ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

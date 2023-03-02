@@ -1,6 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SegmentedButton, SegmentedButtonsContainer, Tooltip } from "../components";
+import {
+  SegmentedButton,
+  SegmentedButtonsContainer,
+  Tooltip,
+} from "../components";
 import { useAppSelector } from "../redux/hooks";
 import {
   selectPNLPerDay,
@@ -26,30 +30,35 @@ const PlanID = () => {
   const [activity, setActivity] = useState(ACTIVITY_STATES.active);
   const [duration, setDuration] = useState(DURATION_STATES_IN_MONTHS.six);
 
-  const totalTradingDays = Math.floor(duration * (activity / DAYS_IN_WEEK));
-
-  if (planId === undefined) return null
+  if (planId === undefined) return null;
 
   const plan = useAppSelector((state) => selectPlanById(state, planId));
 
-  const tradeVolume = (plan.deposit * plan.risk) / 100
-  const tradeVolumeWithLeverage = tradeVolume * plan.leverage
+  const totalTradingDays = Math.floor(duration * (activity / DAYS_IN_WEEK));
 
-  const PNLPerDay = useAppSelector((state) => selectPNLPerDay(state, plan.id, totalTradingDays));
-  const tradesPerDay = useAppSelector((state) => selectTradesPerDay(state, plan.id, parseFloat(PNLPerDay)));
-  
-  let PNLsPerTradeNeeded = []
+  const tradeVolume = (plan.deposit * plan.risk) / 100;
+  const tradeVolumeWithLeverage = tradeVolume * plan.leverage;
+
+  const PNLPerDay = useAppSelector((state) =>
+    selectPNLPerDay(state, plan.id, totalTradingDays)
+  );
+  const tradesPerDay = useAppSelector((state) =>
+    selectTradesPerDay(state, plan.id, parseFloat(PNLPerDay))
+  );
+
+  let PNLsPerTradeNeeded = [];
   for (let trade of tradesPerDay) {
-    PNLsPerTradeNeeded.push((parseFloat(PNLPerDay) / trade).toFixed(2))
+    PNLsPerTradeNeeded.push((parseFloat(PNLPerDay) / trade).toFixed(2));
   }
 
-  // const PNLPerTradeNeeded = (parseFloat(PNLPerDay) / tradesPerDay).toFixed(2);
-
-  const onActivityChange = (evt: ChangeEvent<HTMLInputElement>) => setActivity(parseFloat(evt.target.value));
-  const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) => setDuration(parseFloat(evt.target.value));
+  const onActivityChange = (evt: ChangeEvent<HTMLInputElement>) =>
+    setActivity(parseFloat(evt.target.value));
+  const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) =>
+    setDuration(parseFloat(evt.target.value));
 
   return (
-    <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6 gap-6">
+    <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6 gap-6 relative">
+      <h2 className="absolute top-0 left-0 -translate-y-[calc(100%+8px)] text-4xl text-onSurfaceVariant">{plan.title}</h2>
       <div className="flex flex-col items-center gap-6 rounded-3xl bg-surfaceVariant bg-opacity-20 w-[450px] p-6">
         <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
           Needed PNL for achieving your goals in Months
@@ -85,7 +94,6 @@ const PlanID = () => {
             />
           </SegmentedButtonsContainer>
         </div>
-
         <div className="w-full flex flex-col items-center gap-2">
           <Tooltip title="How many months do you want to chase your goal?">
             <span className="text-base tracking-[0.5px] text-onSurfaceVariant border-b border-dashed border-outline">
@@ -143,15 +151,26 @@ const PlanID = () => {
             </span>
           </div>
           <div className="flex justify-between p-4">
-            <Tooltip className="max-w-[110px]" title={`According to your take profits: ${plan.takeProfit.join('%, ')}%`}>
-            <span className="text-sm tracking-[0.25px] text-onSurfaceVariant border-b border-dashed border-outline cursor-help">
-              Total successful trades per day
-            </span>
+            <Tooltip
+              className="max-w-[110px]"
+              title={`According to your take profits: ${plan.takeProfit.join(
+                "%, "
+              )}%`}
+            >
+              <span className="text-sm tracking-[0.25px] text-onSurfaceVariant border-b border-dashed border-outline cursor-help">
+                Total successful trades per day
+              </span>
             </Tooltip>
-            
+
             <div className="flex gap-2 m-auto">
-              {tradesPerDay.map((trades, i) => 
-              <span key={i} className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1">{trades}</span>)}
+              {tradesPerDay.map((trades, i) => (
+                <span
+                  key={i}
+                  className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1"
+                >
+                  {trades}
+                </span>
+              ))}
             </div>
           </div>
           <div className="flex justify-between p-4">
@@ -159,53 +178,64 @@ const PlanID = () => {
               Needed PNL per trade
             </span>
             <div className="flex gap-2 m-auto">
-            {PNLsPerTradeNeeded.map((pnlPerTrade, i) => 
-              <span key={i} className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1">{pnlPerTrade}$</span>)}
+              {PNLsPerTradeNeeded.map((pnlPerTrade, i) => (
+                <span
+                  key={i}
+                  className="text-sm tracking-[0.25px] text-onTertiaryContainer m-auto bg-tertiaryContainer rounded-full px-4 py-1"
+                >
+                  {pnlPerTrade}$
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col items-center gap-6 rounded-3xl bg-surfaceVariant bg-opacity-20 flex-1 p-6">
-        <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
+      <div className="flex flex-col items-center rounded-3xl bg-surfaceVariant bg-opacity-20 flex-1 p-6 divide-y">
+        <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px] mb-4">
           Total Info
         </h3>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+        <InfoLine>
           <span>Deposit: </span>
-          <span className="flex">{plan.deposit}$</span>
-        </div>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+          <span>{plan.deposit}$</span>
+        </InfoLine>
+        <InfoLine>
           <span>Goal: </span>
           <span>{plan.goal}$</span>
-        </div>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+        </InfoLine>
+        <InfoLine>
           <span>Risk management: </span>
           <span>{plan.risk}%</span>
-        </div>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+        </InfoLine>
+        <InfoLine>
           <span>Leverage: </span>
           <span>{plan.leverage}X</span>
-        </div>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+        </InfoLine>
+        <InfoLine>
           <span>Trade volume: </span>
           <span>{tradeVolume}$</span>
-        </div>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+        </InfoLine>
+        <InfoLine>
           <span>Leveraged trade volume: </span>
           <span>{tradeVolumeWithLeverage}$</span>
-        </div>
-        <div className="flex gap-4 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+        </InfoLine>
+        <InfoLine>
           <span>Take profit: </span>
           <div className="flex gap-2">
             {plan.takeProfit.map((tp, i) => (
-              <span key={i}>{tp}%</span>
+              <span className="text-onTertiaryContainer bg-tertiaryContainer rounded-full px-3 py-1" key={i}>{tp}%</span>
             ))}
           </div>
-          
-        </div>
+        </InfoLine>
       </div>
     </div>
   );
 };
+
+const InfoLine = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-center p-2 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
+    {children}
+  </div>
+);
 
 export default PlanID;

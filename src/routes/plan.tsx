@@ -64,7 +64,7 @@ const SidebarHeading = ({
   title: string;
   onClick: () => void;
 }) => (
-  <button className="absolute left-4 -top-10" type="button" onClick={onClick}>
+  <button className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[calc(100%+8px)] w-max text-3xl text-onSurfaceVariant border-b border-dashed border-outline" type="button" onClick={onClick}>
     {title}
   </button>
 );

@@ -23,7 +23,7 @@ const Sidebar = () => {
             <NavLink to="trades" link={<GraphUp />} title="Trades" />
           </li>
           <li>
-            <NavLink to="backtesting" link={<StatsReport />} title="Backtest" />
+            <NavLink to="backtest" link={<StatsReport />} title="Backtest" />
           </li>
           <li>
             <NavLink to="settings" link={<Settings />} title="Settings" />

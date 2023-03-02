@@ -11,6 +11,7 @@ import Settings from "./routes/Settings";
 import Account from "./routes/Account";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import Backtest from "./routes/Backtest";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "trades/",
         element: <Trades />,
+      },
+      {
+        path: "backtest",
+        element: <Backtest />,
       },
       {
         path: "settings/",

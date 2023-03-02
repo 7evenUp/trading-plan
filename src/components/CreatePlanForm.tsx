@@ -11,6 +11,7 @@ import TextField from "./TextField";
 import Tooltip from "./Tooltip";
 
 const TP_MAX = 3;
+const DEFAULT_TP = 5
 
 const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
   const [name, setPlanName] = useState("");
@@ -27,16 +28,17 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
   const dispatch = useAppDispatch();
 
   const onCreate = () => {
-    // dispatch(
-    //   add({
-    //     id: trim(name),
-    //     title: name.trim(),
-    //     deposit: parseInt(deposit),
-    //     goal: parseInt(goal),
-    //     risk: parseFloat(risk),
-    //     leverage: parseInt(leverage),
-    //   })
-    // );
+    dispatch(
+      add({
+        id: trim(name),
+        title: name.trim(),
+        deposit: parseInt(deposit),
+        goal: parseInt(goal),
+        risk: parseFloat(risk),
+        leverage: parseInt(leverage),
+        takeProfit: tpArray.length ? tpArray : [DEFAULT_TP]
+      })
+    );
     closeForm();
     navigate(`/plan/${trim(name)}`);
   };

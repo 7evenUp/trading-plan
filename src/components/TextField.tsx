@@ -16,6 +16,7 @@ const TextField = ({
     >
       <input
         id={name}
+        name={name}
         value={value}
         onChange={onChange}
         className="peer text-onSurface bg-transparent outline-none text-base leading-6 tracking-[0.5px]"

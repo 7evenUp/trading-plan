@@ -1,4 +1,5 @@
 import { useReducer, Reducer } from 'react'
+import TextField from './TextField'
 
 type State = {
   entry: string
@@ -47,17 +48,37 @@ const initialState: State = { entry: '', tp: '', sl: '', isProfit: true };
 const BacktestForm = () => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(reducer, initialState);
 
-  const handleChange = (evt: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = (evt: React.FormEvent<HTMLInputElement>) => {
     const type = `changed_${evt.currentTarget.name}`
     const payload = evt.currentTarget.value
     dispatch({type, payload})
   }
 
+  // const handleRadioChange = ()
+
   return (
     <div className='flex flex-col gap-2'>
-      <input name="entry" value={state.entry} onChange={handleChange} />
-      <input name="tp" value={state.tp} onChange={handleChange} />
-      <input name="sl" value={state.sl} onChange={handleChange} />
+      <TextField
+        label="Entry price"
+        name="entry"
+        value={state.entry}
+        onChange={handleInputChange}/>
+      <TextField
+        label="Take profit"
+        name="tp"
+        value={state.tp}
+        onChange={handleInputChange}/>
+      <TextField
+        label="Stop loss"
+        name="sl"
+        value={state.sl}
+        onChange={handleInputChange}/>
+      
+      <div className="flex flex-col gap-2">
+        <div className='flex gap-4 items-center'>
+          <input type={'radio'} name="isProfit" checked={state.isProfit} onChange={evt => evt.currentTarget.checked} />
+        </div>
+      </div>
     </div>
   )
 }

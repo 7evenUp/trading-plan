@@ -10,7 +10,7 @@ import {
   selectPNLPerDay,
   selectPlanById,
   selectTradesPerDay,
-} from "../redux/selectors";
+} from "../redux/plan/selectors";
 
 const DAYS_IN_WEEK = 7;
 const ACTIVITY_STATES = {

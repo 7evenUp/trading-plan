@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Plan } from "../redux/planSlice";
+import { Plan } from "../redux/plan/planSlice";
 
 const PlanCard = ({ plan }: { plan: Plan }) => {
   const navigate = useNavigate();

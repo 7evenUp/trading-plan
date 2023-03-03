@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { Plan } from "./planSlice";
-import { RootState } from "./store";
+import { RootState } from "../store";
 
 export const selectPlanById = createSelector(
   [(state: RootState) => state.plans, (_, id: string) => id],

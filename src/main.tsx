@@ -10,7 +10,7 @@ import Trades from "./routes/Trades";
 import Settings from "./routes/Settings";
 import Account from "./routes/Account";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { setupStore } from "./redux/store";
 import Backtest from "./routes/Backtest";
 
 const router = createBrowserRouter([
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={setupStore()}>
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>

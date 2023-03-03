@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { trim } from "../lib/trim";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { add } from "../redux/planSlice";
+import { add } from "../redux/plan/planSlice";
 import FilledButton from "./FilledButton";
 import SegmentedButton from "./SegmentedButton";
 import SegmentedButtonsContainer from "./SegmentedButtonsContainer";

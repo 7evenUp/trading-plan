@@ -1,18 +1,30 @@
 import { useState } from "react"
-import { TextField } from "../components"
+import { BacktestForm, TextField } from "../components"
 
 const Backtest = () => {
-  const [backtestName, setBacktestName] = useState('')
+  const [entry, setEntry] = useState('')
+  const [tp, setTp] = useState('')
+
+  const handleInputChange = ((evt: React.FormEvent<HTMLInputElement>) => { console.log(evt.currentTarget.name)})
 
   return (
     <div className="bg-surface rounded-t-3xl h-[90%] w-5/6 flex flex-col items-center justify-center gap-4">
-      <h1 className="text-4xl text-onSurface">Backtest page</h1>
-      <TextField
-        label="Backtest name"
-        name="backtest"
-        value={backtestName}
-        onChange={(evt) => setBacktestName(evt.currentTarget.value)}
+      <BacktestForm />
+      {/* <h1 className="text-4xl text-onSurface">Backtest page</h1>
+      <input onChange={handleInputChange} name="x"/>
+      <input onChange={handleInputChange} name="y"/> */}
+      {/* <TextField
+        label="Entry price"
+        name="entry"
+        value={entry}
+        onChange={handleInputChange}
       />
+      <TextField
+        label="Entry price"
+        name="entry"
+        value={tp}
+        onChange={handleInputChange}
+      /> */}
     </div>
   )
 }

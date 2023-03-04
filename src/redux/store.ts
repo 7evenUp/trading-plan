@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState } from '@reduxjs/toolkit'
 import planReducer from './plan/planSlice'
+import backtestReducer from './backtest/backtestSlice'
 
 const rootReducer = combineReducers({
-  plans: planReducer
+  plans: planReducer,
+  backtest: backtestReducer
 })
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

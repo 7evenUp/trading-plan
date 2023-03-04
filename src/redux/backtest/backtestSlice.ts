@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 export type Backtest = {
   entry: number;
@@ -69,3 +70,6 @@ export const backtestSlice = createSlice({
 export const { add } = backtestSlice.actions;
 
 export default backtestSlice.reducer;
+
+// Selectors
+export const selectBacktests = (state: RootState) => state.backtest

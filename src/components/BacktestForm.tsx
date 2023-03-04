@@ -1,4 +1,6 @@
 import { useReducer, Reducer } from "react";
+import { add } from "../redux/backtest/backtestSlice";
+import { useAppDispatch } from "../redux/hooks";
 import FilledButton from "./FilledButton";
 import Radio from "./Radio";
 import TextField from "./TextField";
@@ -7,7 +9,7 @@ type State = {
   entry: string;
   tp: string;
   sl: string;
-  isProfit: boolean;
+  result: 'success' | 'failure';
 };
 
 type Action = {
@@ -35,10 +37,10 @@ const reducer = (state: State, action: Action) => {
         sl: action.payload,
       };
     }
-    case "changed_isProfit": {
+    case "changed_result": {
       return {
         ...state,
-        isProfit: action.payload,
+        result: action.payload,
       };
     }
     default:
@@ -46,13 +48,15 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const initialState: State = { entry: "", tp: "", sl: "", isProfit: true };
+const initialState: State = { entry: "", tp: "", sl: "", result: 'success' };
 
 const BacktestForm = () => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
     reducer,
     initialState
   );
+
+  const reduxDispatch = useAppDispatch()
 
   const handleInputChange = (evt: React.FormEvent<HTMLInputElement>) => {
     const type = `changed_${evt.currentTarget.name}`;
@@ -61,7 +65,12 @@ const BacktestForm = () => {
   };
 
   const handleAdd = () => {
-
+    reduxDispatch(add({
+      entry: parseFloat(state.entry),
+      tp: parseFloat(state.tp),
+      sl: parseFloat(state.sl),
+      result: state.result
+    }))
   }
 
   return (
@@ -89,8 +98,8 @@ const BacktestForm = () => {
         <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
           Trade result
         </span>
-        <Radio label="Success" name="isProfit" value="success" onChange={handleInputChange} />
-        <Radio label="Failure" name="isProfit" value="failure" onChange={handleInputChange} />
+        <Radio label="Success" name="result" value="success" onChange={handleInputChange} />
+        <Radio label="Failure" name="result" value="failure" onChange={handleInputChange} />
       </div>
 
       <FilledButton label="Add" onClick={handleAdd} />

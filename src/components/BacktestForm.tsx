@@ -76,7 +76,12 @@ const BacktestForm = () => {
       
       <div className="flex flex-col gap-2">
         <div className='flex gap-4 items-center'>
-          <input type={'radio'} name="isProfit" checked={state.isProfit} onChange={evt => evt.currentTarget.checked} />
+          <input id="success" type={'radio'} name="isProfit" value="success" onChange={handleInputChange} />
+          <label htmlFor='success'>Success</label>
+        </div>
+        <div className='flex gap-4 items-center'>
+          <input id="failure" type={'radio'} name="isProfit" value="failure" onChange={handleInputChange} />
+          <label htmlFor='failure'>Failure</label>
         </div>
       </div>
     </div>

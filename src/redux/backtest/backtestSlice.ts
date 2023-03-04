@@ -5,7 +5,7 @@ export type Backtest = {
   entry: number;
   tp: number; // take profit
   sl: number; // stop loss
-  isProfit: boolean;
+  result: 'success' | 'failure'
 };
 
 export type BacktestState = Backtest[];
@@ -15,37 +15,37 @@ const initialState: BacktestState = [
     entry: 21000.0,
     tp: 21510.0,
     sl: 20900.85,
-    isProfit: true,
+    result: 'success'
   },
   {
     entry: 21700.0,
     tp: 22100.0,
     sl: 21490.15,
-    isProfit: false,
+    result: 'failure'
   },
   {
     entry: 21400.0,
     tp: 21010.0,
     sl: 21510.85,
-    isProfit: true,
+    result: 'success'
   },
   {
     entry: 1.47,
     tp: 1.7,
     sl: 1.39,
-    isProfit: false,
+    result: 'failure'
   },
   {
     entry: 1.38,
     tp: 1.2,
     sl: 1.4,
-    isProfit: true,
+    result: 'success'
   },
   {
     entry: 1.18,
     tp: 1.05,
     sl: 1.21,
-    isProfit: false,
+    result: 'failure'
   },
 ];
 
@@ -58,7 +58,7 @@ export const backtestSlice = createSlice({
         entry: action.payload.entry,
         tp: action.payload.tp,
         sl: action.payload.sl,
-        isProfit: action.payload.isProfit,
+        result: action.payload.result,
       };
       state.push(newBacktest);
     },

@@ -1,4 +1,5 @@
 import { useReducer, Reducer } from "react";
+import FilledButton from "./FilledButton";
 import Radio from "./Radio";
 import TextField from "./TextField";
 
@@ -14,7 +15,7 @@ type Action = {
   payload: any;
 };
 
-function reducer(state: State, action: Action) {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "changed_entry": {
       return {
@@ -59,8 +60,12 @@ const BacktestForm = () => {
     dispatch({ type, payload });
   };
 
+  const handleAdd = () => {
+
+  }
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <TextField
         label="Entry price"
         name="entry"
@@ -81,9 +86,14 @@ const BacktestForm = () => {
       />
 
       <div className="flex flex-col gap-2">
+        <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
+          Trade result
+        </span>
         <Radio label="Success" name="isProfit" value="success" onChange={handleInputChange} />
         <Radio label="Failure" name="isProfit" value="failure" onChange={handleInputChange} />
       </div>
+
+      <FilledButton label="Add" onClick={handleAdd} />
     </div>
   );
 };

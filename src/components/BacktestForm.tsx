@@ -1,4 +1,5 @@
 import { useReducer, Reducer } from "react";
+import Radio from "./Radio";
 import TextField from "./TextField";
 
 type State = {
@@ -80,40 +81,8 @@ const BacktestForm = () => {
       />
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="success" className="flex gap-4 items-center">
-          <div className="relative flex">
-            <input
-              className="appearance-none peer border-2 border-outline rounded-full w-5 h-5 checked:border-primary"
-              id="success"
-              type={"radio"}
-              name="isProfit"
-              value="success"
-              onChange={handleInputChange}
-            />
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block
-                          w-[10px] h-[10px] rounded-full bg-primary scale-0 transition-all peer-checked:scale-100"
-            />
-          </div>
-          <span>Success</span>
-        </label>
-        <label htmlFor="failure" className="flex gap-4 items-center">
-          <div className="relative flex">
-            <input
-              className="appearance-none peer border-2 border-outline rounded-full w-5 h-5 checked:border-primary"
-              id="failure"
-              type={"radio"}
-              name="isProfit"
-              value="failure"
-              onChange={handleInputChange}
-            />
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block
-                          w-[10px] h-[10px] rounded-full bg-primary scale-0 transition-all peer-checked:scale-100"
-            />
-          </div>
-          <span>failure</span>
-        </label>
+        <Radio label="Success" name="isProfit" value="success" onChange={handleInputChange} />
+        <Radio label="Failure" name="isProfit" value="failure" onChange={handleInputChange} />
       </div>
     </div>
   );

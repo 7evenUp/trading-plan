@@ -15,3 +15,13 @@
     border-radius: 100%;
   }
 }
+
+tbody::-webkit-scrollbar {
+  width: 5px;
+}
+
+tbody::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #EFE0CF;
+  outline: 1px solid #817567;
+}

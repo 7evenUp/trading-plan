@@ -1,11 +1,16 @@
 import { useReducer, Reducer } from "react";
+import { add } from "../redux/backtest/backtestSlice";
+import { useAppDispatch } from "../redux/hooks";
+import Card from "./Card";
+import FilledButton from "./FilledButton";
+import Radio from "./Radio";
 import TextField from "./TextField";
 
 type State = {
   entry: string;
   tp: string;
   sl: string;
-  isProfit: boolean;
+  result: 'success' | 'failure';
 };
 
 type Action = {
@@ -13,7 +18,7 @@ type Action = {
   payload: any;
 };
 
-function reducer(state: State, action: Action) {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "changed_entry": {
       return {
@@ -33,10 +38,10 @@ function reducer(state: State, action: Action) {
         sl: action.payload,
       };
     }
-    case "changed_isProfit": {
+    case "changed_result": {
       return {
         ...state,
-        isProfit: action.payload,
+        result: action.payload,
       };
     }
     default:
@@ -44,7 +49,7 @@ function reducer(state: State, action: Action) {
   }
 }
 
-const initialState: State = { entry: "", tp: "", sl: "", isProfit: true };
+const initialState: State = { entry: "", tp: "", sl: "", result: 'success' };
 
 const BacktestForm = () => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
@@ -52,14 +57,28 @@ const BacktestForm = () => {
     initialState
   );
 
+  const reduxDispatch = useAppDispatch()
+
   const handleInputChange = (evt: React.FormEvent<HTMLInputElement>) => {
     const type = `changed_${evt.currentTarget.name}`;
     const payload = evt.currentTarget.value;
     dispatch({ type, payload });
   };
 
+  const handleAdd = () => {
+    reduxDispatch(add({
+      entry: parseFloat(state.entry),
+      tp: parseFloat(state.tp),
+      sl: parseFloat(state.sl),
+      result: state.result
+    }))
+  }
+
   return (
-    <div className="flex flex-col gap-2">
+    <Card className="flex flex-col gap-4">
+      <h3 className="text-2xl text-onSurfaceVariant text-center">
+        Add trade
+      </h3>
       <TextField
         label="Entry price"
         name="entry"
@@ -80,42 +99,15 @@ const BacktestForm = () => {
       />
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="success" className="flex gap-4 items-center">
-          <div className="relative flex">
-            <input
-              className="appearance-none peer border-2 border-outline rounded-full w-5 h-5 checked:border-primary"
-              id="success"
-              type={"radio"}
-              name="isProfit"
-              value="success"
-              onChange={handleInputChange}
-            />
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block
-                          w-[10px] h-[10px] rounded-full bg-primary scale-0 transition-all peer-checked:scale-100"
-            />
-          </div>
-          <span>Success</span>
-        </label>
-        <label htmlFor="failure" className="flex gap-4 items-center">
-          <div className="relative flex">
-            <input
-              className="appearance-none peer border-2 border-outline rounded-full w-5 h-5 checked:border-primary"
-              id="failure"
-              type={"radio"}
-              name="isProfit"
-              value="failure"
-              onChange={handleInputChange}
-            />
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block
-                          w-[10px] h-[10px] rounded-full bg-primary scale-0 transition-all peer-checked:scale-100"
-            />
-          </div>
-          <span>failure</span>
-        </label>
+        <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
+          Trade result
+        </span>
+        <Radio label="Success" name="result" value="success" onChange={handleInputChange} />
+        <Radio label="Failure" name="result" value="failure" onChange={handleInputChange} />
       </div>
-    </div>
+
+      <FilledButton label="Add" onClick={handleAdd} />
+    </Card>
   );
 };
 

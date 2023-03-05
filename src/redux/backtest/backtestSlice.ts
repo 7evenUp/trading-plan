@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 export type Backtest = {
   entry: number;
@@ -65,7 +66,6 @@ export const backtestSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { add } = backtestSlice.actions;
 
 export default backtestSlice.reducer;

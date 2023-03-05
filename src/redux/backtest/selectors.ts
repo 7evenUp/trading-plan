@@ -4,7 +4,7 @@ import { RootState } from "../store";
 export const selectBacktests = (state: RootState) => state.backtest;
 
 export const selectPNL = createSelector(
-  (state: RootState) => state.backtest,
+  selectBacktests,
   (backtest) => {
     let pnl = 0;
     backtest.forEach((item) => {
@@ -20,7 +20,7 @@ export const selectPNL = createSelector(
 );
 
 export const selectWinrate = createSelector(
-  (state: RootState) => state.backtest,
+  selectBacktests,
   (backtest) => {
     const wins = backtest.filter((item) => item.result === "success");
     return (wins.length * 100) / backtest.length;
@@ -28,7 +28,7 @@ export const selectWinrate = createSelector(
 );
 
 export const selectWinsAndFailsAmount = createSelector(
-  (state: RootState) => state.backtest,
+  selectBacktests,
   (backtest) => {
     const wins = backtest.filter((item) => item.result === "success");
     const fails = backtest.filter((item) => item.result === "failure");

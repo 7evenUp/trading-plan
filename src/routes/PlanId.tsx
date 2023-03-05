@@ -63,7 +63,7 @@ const PlanID = () => {
         {plan.title}
       </h2>
       <Card className="flex flex-col items-center gap-6 w-[450px]">
-        <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
+        <h3 className="text-2xl text-onSurfaceVariant text-center w-[280px]">
           Needed PNL for achieving your goals in Months
         </h3>
         <div className="w-full flex flex-col items-center gap-2">
@@ -195,7 +195,7 @@ const PlanID = () => {
       </Card>
 
       <Card className="flex flex-col items-center flex-1 divide-y">
-        <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px] mb-4">
+        <h3 className="text-2xl text-onSurfaceVariant text-center mb-4">
           Total Info
         </h3>
         <InfoLine>

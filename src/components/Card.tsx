@@ -7,7 +7,7 @@ const Card = ({
 }) => {
   return (
     <div
-      className={`rounded-3xl bg-surfaceVariant bg-opacity-20 p-6 ${className}`}
+      className={`rounded-3xl bg-surfaceVariant bg-opacity-20 p-6 h-max ${className}`}
     >
       {children}
     </div>

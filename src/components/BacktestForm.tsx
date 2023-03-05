@@ -1,6 +1,7 @@
 import { useReducer, Reducer } from "react";
 import { add } from "../redux/backtest/backtestSlice";
 import { useAppDispatch } from "../redux/hooks";
+import Card from "./Card";
 import FilledButton from "./FilledButton";
 import Radio from "./Radio";
 import TextField from "./TextField";
@@ -74,7 +75,10 @@ const BacktestForm = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <Card className="flex flex-col gap-4">
+      <h3 className="text-2xl text-onSurfaceVariant text-center">
+        Add trade
+      </h3>
       <TextField
         label="Entry price"
         name="entry"
@@ -103,7 +107,7 @@ const BacktestForm = () => {
       </div>
 
       <FilledButton label="Add" onClick={handleAdd} />
-    </div>
+    </Card>
   );
 };
 

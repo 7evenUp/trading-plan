@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
+  Card,
   SegmentedButton,
   SegmentedButtonsContainer,
   Tooltip,
@@ -58,8 +59,10 @@ const PlanID = () => {
 
   return (
     <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6 gap-6 relative">
-      <h2 className="absolute top-0 left-0 -translate-y-[calc(100%+8px)] text-4xl text-onSurfaceVariant">{plan.title}</h2>
-      <div className="flex flex-col items-center gap-6 rounded-3xl bg-surfaceVariant bg-opacity-20 w-[450px] p-6">
+      <h2 className="absolute top-0 left-0 -translate-y-[calc(100%+8px)] text-4xl text-onSurfaceVariant">
+        {plan.title}
+      </h2>
+      <Card className="flex flex-col items-center gap-6 w-[450px]">
         <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px]">
           Needed PNL for achieving your goals in Months
         </h3>
@@ -189,9 +192,9 @@ const PlanID = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div className="flex flex-col items-center rounded-3xl bg-surfaceVariant bg-opacity-20 flex-1 p-6 divide-y">
+      <Card className="flex flex-col items-center flex-1 divide-y">
         <h3 className="text-[22px] leading-7 text-onSurfaceVariant text-center w-[260px] mb-4">
           Total Info
         </h3>
@@ -223,11 +226,16 @@ const PlanID = () => {
           <span>Take profit: </span>
           <div className="flex gap-2">
             {plan.takeProfit.map((tp, i) => (
-              <span className="text-onTertiaryContainer bg-tertiaryContainer rounded-full px-3 py-1" key={i}>{tp}%</span>
+              <span
+                className="text-onTertiaryContainer bg-tertiaryContainer rounded-full px-3 py-1"
+                key={i}
+              >
+                {tp}%
+              </span>
             ))}
           </div>
         </InfoLine>
-      </div>
+      </Card>
     </div>
   );
 };

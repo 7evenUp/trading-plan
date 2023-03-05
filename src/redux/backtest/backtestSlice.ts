@@ -66,10 +66,6 @@ export const backtestSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { add } = backtestSlice.actions;
 
 export default backtestSlice.reducer;
-
-// Selectors
-export const selectBacktests = (state: RootState) => state.backtest

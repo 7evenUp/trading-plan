@@ -12,7 +12,7 @@ const Backtest = () => {
   const [isAccumulate, setIsAccumulate] = useState(false);
   const tableRef = useRef<HTMLTableSectionElement>(null);
   const backtest = useAppSelector(selectBacktests);
-  const pnl = useAppSelector(selectPNL);
+  const pnl = useAppSelector((state) => selectPNL(state, isAccumulate));
   const winrate = useAppSelector(selectWinrate);
   const { wins, fails } = useAppSelector(selectWinsAndFailsAmount);
 

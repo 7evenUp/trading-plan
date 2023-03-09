@@ -8,6 +8,53 @@ import {
 } from "../redux/backtest/selectors";
 import { useAppSelector } from "../redux/hooks";
 
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+const data = [
+  {
+    name: 'Page A',
+    x: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    x: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'Page C',
+    x: 2000,
+    pv: 4800,
+    amt: 2290,
+  },
+  {
+    name: 'Page D',
+    x: 2780,
+    pv: 3908,
+    amt: 3000,
+  },
+  {
+    name: 'Page E',
+    x: 1890,
+    pv: 4800,
+    amt: 3181,
+  },
+  {
+    name: 'Page F',
+    x: 2390,
+    pv: 3800,
+    amt: 3500,
+  },
+  {
+    name: 'Page G',
+    x: 3490,
+    pv: 4300,
+    amt: 3100,
+  },
+];
+
 const Backtest = () => {
   const [isAccumulate, setIsAccumulate] = useState(false);
   const tableRef = useRef<HTMLTableSectionElement>(null);
@@ -26,6 +73,7 @@ const Backtest = () => {
 
       {backtest.length ? (
         <>
+        <div className="flex flex-col">
           <Card>
             <h3 className="text-2xl text-onSurfaceVariant text-center mb-6">
               Stats
@@ -69,6 +117,30 @@ const Backtest = () => {
               </div>
             </div>
           </Card>
+          
+          <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 6 }} />
+          <Line type="monotone" dataKey="x" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="amt" stroke="#822a2d" />
+        </LineChart>
+      </ResponsiveContainer>
+          </div>
 
           <Card className="flex-1">
             <h3 className="text-2xl text-onSurfaceVariant text-center mb-6">

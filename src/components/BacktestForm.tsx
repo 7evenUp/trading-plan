@@ -15,7 +15,7 @@ type State = {
 
 type Action = {
   type: string;
-  payload: any;
+  payload?: any;
 };
 
 const reducer = (state: State, action: Action) => {
@@ -43,6 +43,14 @@ const reducer = (state: State, action: Action) => {
         ...state,
         result: action.payload,
       };
+    }
+    case "reset_form": {
+      return {
+        ...state,
+        entry: '',
+        tp: '',
+        sl: ''
+      }
     }
     default:
       throw Error();
@@ -72,6 +80,7 @@ const BacktestForm = () => {
       sl: parseFloat(state.sl),
       result: state.result
     }))
+    dispatch({type: 'reset_form'})
   }
 
   return (

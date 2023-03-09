@@ -8,8 +8,7 @@ import TextField from "./TextField";
 
 type State = {
   entry: string;
-  tp: string;
-  sl: string;
+  exit: string;
   result: 'success' | 'failure';
 };
 
@@ -26,16 +25,10 @@ const reducer = (state: State, action: Action) => {
         entry: action.payload,
       };
     }
-    case "changed_tp": {
+    case "changed_exit": {
       return {
         ...state,
-        tp: action.payload,
-      };
-    }
-    case "changed_sl": {
-      return {
-        ...state,
-        sl: action.payload,
+        exit: action.payload,
       };
     }
     case "changed_result": {
@@ -48,8 +41,7 @@ const reducer = (state: State, action: Action) => {
       return {
         ...state,
         entry: '',
-        tp: '',
-        sl: ''
+        exit: '',
       }
     }
     default:
@@ -57,7 +49,7 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const initialState: State = { entry: "", tp: "", sl: "", result: 'success' };
+const initialState: State = { entry: "", exit: "", result: 'success' };
 
 const BacktestForm = () => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
@@ -74,10 +66,12 @@ const BacktestForm = () => {
   };
 
   const handleAdd = () => {
+    if (!state.entry || !state.exit) {
+      return null
+    }
     reduxDispatch(add({
       entry: parseFloat(state.entry),
-      tp: parseFloat(state.tp),
-      sl: parseFloat(state.sl),
+      exit: parseFloat(state.exit),
       result: state.result
     }))
     dispatch({type: 'reset_form'})
@@ -95,18 +89,11 @@ const BacktestForm = () => {
         onChange={handleInputChange}
       />
       <TextField
-        label="Take profit"
-        name="tp"
-        value={state.tp}
+        label="Exit"
+        name="exit"
+        value={state.exit}
         onChange={handleInputChange}
       />
-      <TextField
-        label="Stop loss"
-        name="sl"
-        value={state.sl}
-        onChange={handleInputChange}
-      />
-
       <div className="flex flex-col gap-2">
         <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
           Trade result

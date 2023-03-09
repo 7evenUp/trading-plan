@@ -3,9 +3,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 export type Backtest = {
-  entry: number;
-  tp: number; // take profit
-  sl: number; // stop loss
+  entry: number; // Price when entering trade
+  exit: number; // Price when exiting trade
   result: 'success' | 'failure'
 };
 
@@ -57,8 +56,7 @@ export const backtestSlice = createSlice({
     add: (state, action: PayloadAction<Backtest>) => {
       const newBacktest: Backtest = {
         entry: action.payload.entry,
-        tp: action.payload.tp,
-        sl: action.payload.sl,
+        exit: action.payload.exit,
         result: action.payload.result,
       };
       state.push(newBacktest);

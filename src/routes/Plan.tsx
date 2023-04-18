@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import { CreatePlanForm, PlanCard } from "../components";
-import { useAppSelector } from "../redux/hooks";
+import { useEffect, useState } from "react"
+import { Outlet, useLocation } from "react-router-dom"
+
+import { useAppSelector } from "../redux/hooks"
+
+import { CreatePlanForm, PlanCard } from "../components"
 
 const Plan = () => {
-  const [isCreatingMode, setIsCreatingMode] = useState(true);
-  const location = useLocation();
-  const plans = useAppSelector((state) => state.plans);
-  const isPlansEmpty = !plans.length;
+  const [isCreatingMode, setIsCreatingMode] = useState(true)
+  const location = useLocation()
+  const plans = useAppSelector((state) => state.plans)
+  const isPlansEmpty = !plans.length
 
-  const toggleCreatingMode = () => setIsCreatingMode(!isCreatingMode);
+  const toggleCreatingMode = () => setIsCreatingMode(!isCreatingMode)
 
   useEffect(() => {
-    if (!isPlansEmpty) toggleCreatingMode();
-  }, []);
+    if (!isPlansEmpty) toggleCreatingMode()
+  }, [])
 
   return (
     <div className="flex flex-1 flex-row-reverse gap-6 h-[90%] bg-surfaceVariant">
@@ -54,19 +56,23 @@ const Plan = () => {
         <Outlet />
       )}
     </div>
-  );
-};
+  )
+}
 
 const SidebarHeading = ({
   title,
   onClick,
 }: {
-  title: string;
-  onClick: () => void;
+  title: string
+  onClick: () => void
 }) => (
-  <button className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[calc(100%+8px)] w-max text-3xl text-onSurfaceVariant border-b border-dashed border-outline" type="button" onClick={onClick}>
+  <button
+    className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[calc(100%+8px)] w-max text-3xl text-onSurfaceVariant border-b border-dashed border-outline"
+    type="button"
+    onClick={onClick}
+  >
     {title}
   </button>
-);
+)
 
-export default Plan;
+export default Plan

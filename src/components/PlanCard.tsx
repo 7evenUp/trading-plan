@@ -1,17 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { Plan } from "../redux/plan/planSlice";
+import clsx from "clsx"
+import { useNavigate } from "react-router-dom"
+
+import { Plan } from "../redux/plan/planSlice"
 
 const PlanCard = ({ plan }: { plan: Plan }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <div
-      className={`group bg-background rounded-xl w-full cursor-pointer
-                        ${
-                          location.pathname === "/plan/" + plan.id &&
-                          "is-active ring-1 ring-outline"
-                        }`}
+      className={clsx(
+        "group bg-background rounded-xl w-full cursor-pointer",
+        location.pathname === "/plan/" + plan.id &&
+          "is-active ring-1 ring-outline"
+      )}
       onClick={() => {
-        navigate(`/plan/${plan.id}`);
+        navigate(`/plan/${plan.id}`)
       }}
     >
       <header className="group-[.is-active]:bg-primary group-[.is-active]:bg-opacity-40 rounded-t-xl flex items-center justify-between p-4 bg-surfaceVariant bg-opacity-40">
@@ -24,11 +26,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
           <span className="text-base tracking-[0.15px] font-medium text-onSurface group-[.is-active]:text-onPrimaryContainer">
             Deposit
           </span>
-          <span
-            className="text-base tracking-[0.15px] font-medium min-w-[80px] px-2 py-1
-                                bg-tertiaryContainer text-onTertiaryContainer rounded-full flex justify-center
-                                group-[.is-active]:bg-primary group-[.is-active]:text-onPrimary"
-          >
+          <span className="text-base tracking-[0.15px] font-medium min-w-[80px] px-2 py-1 bg-tertiaryContainer text-onTertiaryContainer rounded-full flex justify-center group-[.is-active]:bg-primary group-[.is-active]:text-onPrimary">
             {plan.deposit}$
           </span>
         </div>
@@ -36,11 +34,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
           <span className="text-base tracking-[0.15px] font-medium text-onSurface">
             Goal
           </span>
-          <div
-            className="text-base tracking-[0.15px] font-medium min-w-[80px] px-2 py-1
-                                bg-tertiaryContainer text-onTertiaryContainer rounded-full flex justify-center
-                                group-[.is-active]:bg-primary group-[.is-active]:text-onPrimary"
-          >
+          <div className="text-base tracking-[0.15px] font-medium min-w-[80px] px-2 py-1 bg-tertiaryContainer text-onTertiaryContainer rounded-full flex justify-center group-[.is-active]:bg-primary group-[.is-active]:text-onPrimary">
             {plan.goal}$
           </div>
         </div>
@@ -48,17 +42,13 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
           <span className="text-base tracking-[0.15px] font-medium text-onSurface">
             Risk
           </span>
-          <div
-            className="text-base tracking-[0.15px] font-medium min-w-[80px] px-2 py-1
-                                bg-tertiaryContainer text-onTertiaryContainer rounded-full flex justify-center
-                                group-[.is-active]:bg-primary group-[.is-active]:text-onPrimary"
-          >
+          <div className="text-base tracking-[0.15px] font-medium min-w-[80px] px-2 py-1 bg-tertiaryContainer text-onTertiaryContainer rounded-full flex justify-center group-[.is-active]:bg-primary group-[.is-active]:text-onPrimary">
             {plan.risk}%
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PlanCard;
+export default PlanCard

@@ -1,32 +1,35 @@
-import { AddCircle, Check, Cancel } from "iconoir-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { trim } from "../lib/trim";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { add } from "../redux/plan/planSlice";
-import FilledButton from "./FilledButton";
-import SegmentedButton from "./SegmentedButton";
-import SegmentedButtonsContainer from "./SegmentedButtonsContainer";
-import TextField from "./TextField";
-import Tooltip from "./Tooltip";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { AddCircle, Check, Cancel } from "iconoir-react"
 
-const TP_MAX = 3;
+import { trim } from "../lib/trim"
+
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { add } from "../redux/plan/planSlice"
+
+import FilledButton from "./FilledButton"
+import SegmentedButton from "./SegmentedButton"
+import SegmentedButtonsContainer from "./SegmentedButtonsContainer"
+import TextField from "./TextField"
+import Tooltip from "./Tooltip"
+
+const TP_MAX = 3
 const DEFAULT_TP = 5
 
 const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
-  const [name, setPlanName] = useState("");
-  const [deposit, setDeposit] = useState("");
-  const [goal, setGoal] = useState("");
-  const [risk, setRisk] = useState("");
-  const [leverage, setLeverage] = useState("1");
-  const [tp, setTp] = useState("");
-  const [isTPCreating, setIsTPCreating] = useState(false);
-  const [tpArray, setTpArray] = useState<number[]>([]);
+  const [name, setPlanName] = useState("")
+  const [deposit, setDeposit] = useState("")
+  const [goal, setGoal] = useState("")
+  const [risk, setRisk] = useState("")
+  const [leverage, setLeverage] = useState("1")
+  const [tp, setTp] = useState("")
+  const [isTPCreating, setIsTPCreating] = useState(false)
+  const [tpArray, setTpArray] = useState<number[]>([])
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const plans = useAppSelector(state => state.plans)
-  const dispatch = useAppDispatch();
+  const plans = useAppSelector((state) => state.plans)
+  const dispatch = useAppDispatch()
 
   const onCreate = () => {
     dispatch(
@@ -37,17 +40,17 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
         goal: parseInt(goal),
         risk: parseFloat(risk),
         leverage: parseInt(leverage),
-        takeProfit: tpArray.length ? tpArray : [DEFAULT_TP]
+        takeProfit: tpArray.length ? tpArray : [DEFAULT_TP],
       })
-    );
-    closeForm();
-    navigate(`/plan/${trim(name)}`);
-  };
+    )
+    closeForm()
+    navigate(`/plan/${trim(name)}`)
+  }
 
   return (
     <div className="w-full p-6 rounded-xl bg-surface">
       <h2 className="text-[22px] leading-7 text-center mb-6">
-        {plans.length ? 'Create new plan' : 'Create your first plan'}
+        {plans.length ? "Create new plan" : "Create your first plan"}
       </h2>
       <form className="flex flex-col gap-4 w-full">
         <TextField
@@ -79,7 +82,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
               name="risk"
               value="1"
               onChange={(evt) => {
-                setRisk(evt.target.value);
+                setRisk(evt.target.value)
               }}
             />
             <SegmentedButton
@@ -88,7 +91,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
               name="risk"
               value="2"
               onChange={(evt) => {
-                setRisk(evt.target.value);
+                setRisk(evt.target.value)
               }}
             />
             <SegmentedButton
@@ -97,7 +100,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
               name="risk"
               value="5"
               onChange={(evt) => {
-                setRisk(evt.target.value);
+                setRisk(evt.target.value)
               }}
             />
           </SegmentedButtonsContainer>
@@ -133,9 +136,9 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
                   width={20}
                   height={20}
                   onClick={() => {
-                    setTpArray([...tpArray, parseFloat(tp)]);
-                    setIsTPCreating(false);
-                    setTp("");
+                    setTpArray([...tpArray, parseFloat(tp)])
+                    setIsTPCreating(false)
+                    setTp("")
                   }}
                 />
                 <Cancel
@@ -143,8 +146,8 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
                   width={20}
                   height={20}
                   onClick={() => {
-                    setIsTPCreating(false);
-                    setTp("");
+                    setIsTPCreating(false)
+                    setTp("")
                   }}
                 />
               </div>
@@ -154,7 +157,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
                 width={22}
                 height={22}
                 onClick={() => {
-                  setIsTPCreating(true);
+                  setIsTPCreating(true)
                 }}
               />
             )}
@@ -181,7 +184,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
         <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default CreatePlanForm;
+export default CreatePlanForm

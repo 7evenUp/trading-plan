@@ -4,10 +4,10 @@ const TextField = ({
   onChange,
   name,
 }: {
-  label: string;
-  value: string;
-  onChange: (evt: React.FormEvent<HTMLInputElement>) => void;
-  name: string;
+  label: string
+  value: string
+  onChange: (evt: React.FormEvent<HTMLInputElement>) => void
+  name: string
 }) => {
   return (
     <label
@@ -25,7 +25,7 @@ const TextField = ({
         {label}
       </span>
     </label>
-  );
-};
+  )
+}
 
-export default TextField;
+export default TextField

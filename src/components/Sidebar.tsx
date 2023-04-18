@@ -1,4 +1,4 @@
-import { NavLink as RouterNavLink } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom"
 import {
   HomeSimple,
   Presentation,
@@ -6,7 +6,8 @@ import {
   Settings,
   User,
   StatsReport,
-} from "iconoir-react";
+} from "iconoir-react"
+import clsx from "clsx"
 
 const Sidebar = () => {
   return (
@@ -34,28 +35,29 @@ const Sidebar = () => {
         </ul>
       </nav>
     </div>
-  );
-};
+  )
+}
 
 const NavLink = ({
   to,
   link,
   title,
 }: {
-  to: string;
-  link: React.ReactNode;
-  title: string;
+  to: string
+  link: React.ReactNode
+  title: string
 }) => {
   return (
     <RouterNavLink to={to} className="group flex flex-col items-center gap-1">
       {({ isActive }) => (
         <>
           <div
-            className={`py-1 px-4 rounded-full transition-all ${
+            className={clsx(
+              "py-1 px-4 rounded-full transition-all",
               isActive
                 ? "bg-primaryContainer group-hover:bg-primary group-hover:bg-opacity-10 group-active:bg-opacity-20"
                 : "group-hover:bg-onSurfaceVariant group-hover:bg-opacity-10 group-active:bg-opacity-20"
-            }`}
+            )}
           >
             <span
               className={
@@ -66,16 +68,17 @@ const NavLink = ({
             </span>
           </div>
           <span
-            className={`font-medium text-xs tracking=[0.5px] ${
+            className={clsx(
+              "font-medium text-xs tracking=[0.5px]",
               isActive ? "text-onSurface" : "text-onSurfaceVariant"
-            }`}
+            )}
           >
             {title}
           </span>
         </>
       )}
     </RouterNavLink>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

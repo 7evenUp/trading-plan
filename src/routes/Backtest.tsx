@@ -1,13 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import { BacktestForm, Card, Switch } from "../components"
-import {
-  selectBacktests,
-  selectPNL,
-  selectPNLs,
-  selectWinrate,
-  selectWinsAndFailsAmount,
-} from "../redux/backtest/selectors"
-import { useAppSelector } from "../redux/hooks"
 
 import {
   XAxis,
@@ -18,6 +9,17 @@ import {
   AreaChart,
   Area,
 } from "recharts"
+
+import {
+  selectBacktests,
+  selectPNL,
+  selectPNLs,
+  selectWinrate,
+  selectWinsAndFailsAmount,
+} from "../redux/backtest/selectors"
+import { useAppSelector } from "../redux/hooks"
+
+import { BacktestForm, Card, Switch } from "../components"
 
 const Backtest = () => {
   const [isAccumulate, setIsAccumulate] = useState(false)

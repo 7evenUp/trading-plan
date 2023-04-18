@@ -1,8 +1,9 @@
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
-import { Sidebar } from "./components";
+import { useRouteError, isRouteErrorResponse } from "react-router-dom"
+
+import { Sidebar } from "./components"
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError()
 
   return (
     <div className="flex w-screen min-h-screen">
@@ -25,5 +26,5 @@ export default function ErrorPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

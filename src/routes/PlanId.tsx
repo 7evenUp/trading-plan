@@ -1,61 +1,63 @@
-import { ChangeEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { ChangeEvent, useState } from "react"
+import { useParams } from "react-router-dom"
+
+import {
+  selectPNLPerDay,
+  selectPlanById,
+  selectTradesPerDay,
+} from "../redux/plan/selectors"
+import { useAppSelector } from "../redux/hooks"
+
 import {
   Card,
   SegmentedButton,
   SegmentedButtonsContainer,
   Tooltip,
-} from "../components";
-import { useAppSelector } from "../redux/hooks";
-import {
-  selectPNLPerDay,
-  selectPlanById,
-  selectTradesPerDay,
-} from "../redux/plan/selectors";
+} from "../components"
 
-const DAYS_IN_WEEK = 7;
+const DAYS_IN_WEEK = 7
 const ACTIVITY_STATES = {
   lazy: 2.5,
   active: 4,
   fullTime: 5.75,
-};
+}
 const DURATION_STATES_IN_MONTHS = {
   one: 30,
   three: 91,
   six: 182,
   twelve: 365,
-};
+}
 
 const PlanID = () => {
-  const { planId } = useParams();
-  const [activity, setActivity] = useState(ACTIVITY_STATES.active);
-  const [duration, setDuration] = useState(DURATION_STATES_IN_MONTHS.six);
+  const { planId } = useParams()
+  const [activity, setActivity] = useState(ACTIVITY_STATES.active)
+  const [duration, setDuration] = useState(DURATION_STATES_IN_MONTHS.six)
 
-  if (planId === undefined) return null;
+  if (planId === undefined) return null
 
-  const plan = useAppSelector((state) => selectPlanById(state, planId));
+  const plan = useAppSelector((state) => selectPlanById(state, planId))
 
-  const totalTradingDays = Math.floor(duration * (activity / DAYS_IN_WEEK));
+  const totalTradingDays = Math.floor(duration * (activity / DAYS_IN_WEEK))
 
-  const tradeVolume = (plan.deposit * plan.risk) / 100;
-  const tradeVolumeWithLeverage = tradeVolume * plan.leverage;
+  const tradeVolume = (plan.deposit * plan.risk) / 100
+  const tradeVolumeWithLeverage = tradeVolume * plan.leverage
 
   const PNLPerDay = useAppSelector((state) =>
     selectPNLPerDay(state, plan.id, totalTradingDays)
-  );
+  )
   const tradesPerDay = useAppSelector((state) =>
     selectTradesPerDay(state, plan.id, parseFloat(PNLPerDay))
-  );
+  )
 
-  let PNLsPerTradeNeeded = [];
+  let PNLsPerTradeNeeded = []
   for (let trade of tradesPerDay) {
-    PNLsPerTradeNeeded.push((parseFloat(PNLPerDay) / trade).toFixed(2));
+    PNLsPerTradeNeeded.push((parseFloat(PNLPerDay) / trade).toFixed(2))
   }
 
   const onActivityChange = (evt: ChangeEvent<HTMLInputElement>) =>
-    setActivity(parseFloat(evt.target.value));
+    setActivity(parseFloat(evt.target.value))
   const onDurationChange = (evt: ChangeEvent<HTMLInputElement>) =>
-    setDuration(parseFloat(evt.target.value));
+    setDuration(parseFloat(evt.target.value))
 
   return (
     <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6 gap-6 relative">
@@ -237,13 +239,13 @@ const PlanID = () => {
         </InfoLine>
       </Card>
     </div>
-  );
-};
+  )
+}
 
 const InfoLine = ({ children }: { children: React.ReactNode }) => (
   <div className="flex items-center p-2 w-full justify-between text-sm tracking-[0.25px] text-onSurfaceVariant">
     {children}
   </div>
-);
+)
 
-export default PlanID;
+export default PlanID

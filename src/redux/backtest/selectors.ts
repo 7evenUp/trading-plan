@@ -28,6 +28,34 @@ export const selectPNL = createSelector(
   }
 );
 
+export const selectPNLs = createSelector(
+  [selectBacktests, (_, isCompound: boolean) => isCompound],
+  (backtest, isCompound) => {
+    let pnl = 1;
+    let pnlArray: string[] = []
+    backtest.forEach((item) => {
+      if (isCompound) {
+        if (item.result === "success") {
+          pnl *= Math.abs((item.exit - item.entry) / item.entry) + 1;
+        } else {
+          pnl -= Math.abs((item.exit - item.entry) / item.entry) * pnl;
+        }
+      } else {
+        const changedPercent = Math.abs(
+          ((item.exit - item.entry) * 100) / item.entry
+        );
+        item.result === "success"
+          ? (pnl += changedPercent)
+          : (pnl -= changedPercent);
+      }
+      const pnlToPush = isCompound ? ((pnl - 1) * 100).toFixed(2) : (pnl - 1).toFixed(2);
+      pnlArray.push(pnlToPush)
+    });
+
+    return pnlArray
+  }
+)
+
 export const selectWinrate = createSelector(selectBacktests, (backtest) => {
   const wins = backtest.filter((item) => item.result === "success");
   return (wins.length * 100) / backtest.length;

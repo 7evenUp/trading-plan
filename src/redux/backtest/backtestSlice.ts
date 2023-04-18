@@ -12,7 +12,7 @@ export type BacktestState = Backtest[];
 const initialState: BacktestState = [
   {
     entry: 1511.43,
-    exit: 1533.09,
+    exit: 1593.09,
     result: 'failure',
   },
   {

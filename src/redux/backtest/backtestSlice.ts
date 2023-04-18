@@ -1,53 +1,75 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 
 export type Backtest = {
-  entry: number;
-  tp: number; // take profit
-  sl: number; // stop loss
+  entry: number; // Price when entering trade
+  exit: number; // Price when exiting trade
   result: 'success' | 'failure'
 };
 
 export type BacktestState = Backtest[];
 
 const initialState: BacktestState = [
-  // {
-  //   entry: 21000.0,
-  //   tp: 21510.0,
-  //   sl: 20900.85,
-  //   result: 'success'
-  // },
-  // {
-  //   entry: 21700.0,
-  //   tp: 22100.0,
-  //   sl: 21490.15,
-  //   result: 'failure'
-  // },
-  // {
-  //   entry: 21400.0,
-  //   tp: 21010.0,
-  //   sl: 21510.85,
-  //   result: 'success'
-  // },
-  // {
-  //   entry: 1.47,
-  //   tp: 1.7,
-  //   sl: 1.39,
-  //   result: 'failure'
-  // },
-  // {
-  //   entry: 1.38,
-  //   tp: 1.2,
-  //   sl: 1.4,
-  //   result: 'success'
-  // },
-  // {
-  //   entry: 1.18,
-  //   tp: 1.05,
-  //   sl: 1.21,
-  //   result: 'failure'
-  // },
+  {
+    entry: 1511.43,
+    exit: 1593.09,
+    result: 'failure',
+  },
+  {
+    entry: 1600.49,
+    exit: 1647.04,
+    result: 'success',
+  },
+  {
+    entry: 1555.97,
+    exit: 1543.95,
+    result: 'success',
+  },
+  {
+    entry: 1653.86,
+    exit: 1581.55,
+    result: 'failure',
+  },
+  {
+    entry: 1554.24,
+    exit: 1570.91,
+    result: 'failure',
+  },
+  {
+    entry: 1641.68,
+    exit: 1678.14,
+    result: 'success',
+  },
+  {
+    entry: 1619.48,
+    exit: 1634.81,
+    result: 'failure',
+  },
+  {
+    entry: 1671.03,
+    exit: 1653.08,
+    result: 'failure',
+  },
+  {
+    entry: 1579.81,
+    exit: 1537.03,
+    result: 'success',
+  },
+  {
+    entry: 1560.31,
+    exit: 1572.26,
+    result: 'success',
+  },
+  {
+    entry: 1659.76,
+    exit: 1613.73,
+    result: 'success',
+  },
+  {
+    entry: 1641.36,
+    exit: 1644.26,
+    result: 'success',
+  },
 ];
 
 export const backtestSlice = createSlice({
@@ -57,8 +79,7 @@ export const backtestSlice = createSlice({
     add: (state, action: PayloadAction<Backtest>) => {
       const newBacktest: Backtest = {
         entry: action.payload.entry,
-        tp: action.payload.tp,
-        sl: action.payload.sl,
+        exit: action.payload.exit,
         result: action.payload.result,
       };
       state.push(newBacktest);

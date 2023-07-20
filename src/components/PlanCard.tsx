@@ -8,7 +8,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
   return (
     <div
       className={clsx(
-        "group bg-background rounded-xl w-full cursor-pointer",
+        "group bg-surfaceContainer rounded-xl w-full cursor-pointer",
         location.pathname === "/plan/" + plan.id &&
           "is-active ring-1 ring-outline"
       )}
@@ -16,7 +16,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
         navigate(`/plan/${plan.id}`)
       }}
     >
-      <header className="group-[.is-active]:bg-primary group-[.is-active]:bg-opacity-40 rounded-t-xl flex items-center justify-between p-4 bg-surfaceVariant bg-opacity-40">
+      <header className="group-[.is-active]:bg-primary group-[.is-active]:bg-opacity-40 rounded-t-xl flex items-center justify-between p-4 bg-surfaceContainerHighest">
         <h2 className="text-[22px] leading-7 text-onSurface group-[.is-active]:text-onPrimaryContainer">
           {plan.title}
         </h2>

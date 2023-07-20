@@ -4,9 +4,9 @@ import { add } from "../redux/backtest/backtestSlice"
 import { useAppDispatch } from "../redux/hooks"
 
 import Card from "./Card"
-import FilledButton from "./FilledButton"
 import Radio from "./Radio"
-import TextField from "./TextField"
+import FilledTextField from "../shared/ui/FilledTextField"
+import Button from "../shared/ui/Button"
 
 type State = {
   entry: string
@@ -84,13 +84,13 @@ const BacktestForm = () => {
   return (
     <Card className="flex flex-col gap-4">
       <h3 className="text-2xl text-onSurfaceVariant text-center">Add trade</h3>
-      <TextField
+      <FilledTextField
         label="Entry price"
         name="entry"
         value={state.entry}
         onChange={handleInputChange}
       />
-      <TextField
+      <FilledTextField
         label="Exit"
         name="exit"
         value={state.exit}
@@ -114,7 +114,7 @@ const BacktestForm = () => {
         />
       </div>
 
-      <FilledButton label="Add" onClick={handleAdd} />
+      <Button appearance="filled" onClick={handleAdd}>Add</Button>
     </Card>
   )
 }

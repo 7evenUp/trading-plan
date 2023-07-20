@@ -7,11 +7,11 @@ import { trim } from "../lib/trim"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { add } from "../redux/plan/planSlice"
 
-import FilledButton from "./FilledButton"
 import SegmentedButton from "./SegmentedButton"
 import SegmentedButtonsContainer from "./SegmentedButtonsContainer"
-import TextField from "./TextField"
 import Tooltip from "./Tooltip"
+import FilledTextField from "../shared/ui/FilledTextField"
+import Button from "../shared/ui/Button"
 
 const TP_MAX = 3
 const DEFAULT_TP = 5
@@ -48,24 +48,27 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
   }
 
   return (
-    <div className="w-full p-6 rounded-xl bg-surface">
+    <div className="w-full p-6 rounded-xl bg-surfaceContainer">
       <h2 className="text-[22px] leading-7 text-center mb-6">
         {plans.length ? "Create new plan" : "Create your first plan"}
       </h2>
       <form className="flex flex-col gap-4 w-full">
-        <TextField
+        <FilledTextField
+          className="w-full"
           label="Name for your strategy"
           name="name"
           value={name}
           onChange={(evt) => setPlanName(evt.currentTarget.value)}
         />
-        <TextField
+        <FilledTextField
+          className="w-full"
           label="Total Deposit"
           name="deposit"
           value={deposit}
           onChange={(evt) => setDeposit(evt.currentTarget.value)}
         />
-        <TextField
+        <FilledTextField
+          className="w-full"
           label="Trading goal"
           name="goal"
           value={goal}
@@ -181,7 +184,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
           )}
         </div>
 
-        <FilledButton label="create" onClick={onCreate} icon={<AddCircle />} />
+        <Button appearance="filled" onClick={onCreate} icon={<AddCircle />} >Create</Button>
       </form>
     </div>
   )

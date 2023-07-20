@@ -60,7 +60,7 @@ const PlanID = () => {
     setDuration(parseFloat(evt.target.value))
 
   return (
-    <div className="bg-surface rounded-t-3xl flex-1 flex justify-between p-6 gap-6 relative">
+    <div className="bg-surfaceContainer rounded-t-3xl flex-1 flex justify-between p-6 gap-6 relative">
       <h2 className="absolute top-0 left-0 -translate-y-[calc(100%+8px)] text-4xl text-onSurfaceVariant">
         {plan.title}
       </h2>

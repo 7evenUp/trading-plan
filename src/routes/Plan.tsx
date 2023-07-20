@@ -18,7 +18,7 @@ const Plan = () => {
   }, [])
 
   return (
-    <div className="flex flex-1 flex-row-reverse gap-6 h-[90%] bg-surfaceVariant">
+    <div className="flex flex-1 flex-row-reverse gap-6 h-[90%] bg-surface">
       <div className="flex flex-col gap-6 w-[320px] h-max relative">
         {isCreatingMode ? (
           !isPlansEmpty && (
@@ -38,7 +38,7 @@ const Plan = () => {
       </div>
 
       {location.pathname === "/plan" ? (
-        <div className="bg-surface rounded-t-3xl flex-1 flex flex-col items-center justify-center text-[32px] leading-10">
+        <div className="bg-surfaceContainer rounded-t-3xl flex-1 flex flex-col items-center justify-center text-[32px] leading-10">
           {isCreatingMode ? (
             isPlansEmpty ? (
               <>

@@ -10,7 +10,7 @@ const Card = ({
   return (
     <div
       className={clsx(
-        "rounded-3xl bg-surfaceVariant bg-opacity-20 p-6 h-max",
+        "rounded-3xl bg-surfaceContainerLowest bg-opacity-20 p-6 h-max",
         className
       )}
     >

@@ -10,7 +10,7 @@ const Root = () => {
       {location.pathname === "/" ? (
         <Info />
       ) : (
-        <div className="flex-1 min-h-screen flex items-end bg-surfaceVariant">
+        <div className="flex-1 min-h-screen flex items-end bg-surface">
           <Outlet />
         </div>
       )}

@@ -50,7 +50,7 @@ const Backtest = () => {
   }, [backtest])
 
   return (
-    <div className="bg-surface rounded-t-3xl h-[90%] w-full flex gap-4 p-6">
+    <div className="bg-surfaceContainer rounded-t-3xl h-[90%] w-full flex gap-4 p-6">
       <BacktestForm />
 
       {backtest.length ? (

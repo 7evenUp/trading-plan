@@ -11,26 +11,26 @@ import clsx from "clsx"
 
 const Sidebar = () => {
   return (
-    <div className="bg-surfaceVariant p-3 flex items-center">
+    <div className="bg-surface p-3 flex items-center">
       <nav>
         <ul className="flex flex-col items-center gap-3 justify-center">
           <li>
-            <NavLink to="/" link={<HomeSimple />} title="Home" />
+            <NavLink to="/" icon={<HomeSimple />} title="Home" />
           </li>
           <li>
-            <NavLink to="plan" link={<Presentation />} title="Plan" />
+            <NavLink to="plan" icon={<Presentation />} title="Plan" />
           </li>
           <li>
-            <NavLink to="trades" link={<GraphUp />} title="Trades" />
+            <NavLink to="trades" icon={<GraphUp />} title="Trades" />
           </li>
           <li>
-            <NavLink to="backtest" link={<StatsReport />} title="Backtest" />
+            <NavLink to="backtest" icon={<StatsReport />} title="Backtest" />
           </li>
           <li>
-            <NavLink to="settings" link={<Settings />} title="Settings" />
+            <NavLink to="settings" icon={<Settings />} title="Settings" />
           </li>
           <li>
-            <NavLink to="account" link={<User />} title="Account" />
+            <NavLink to="account" icon={<User />} title="Account" />
           </li>
         </ul>
       </nav>
@@ -40,11 +40,11 @@ const Sidebar = () => {
 
 const NavLink = ({
   to,
-  link,
+  icon,
   title,
 }: {
   to: string
-  link: React.ReactNode
+  icon: React.ReactNode
   title: string
 }) => {
   return (
@@ -55,16 +55,16 @@ const NavLink = ({
             className={clsx(
               "py-1 px-4 rounded-full transition-all",
               isActive
-                ? "bg-primaryContainer group-hover:bg-primary group-hover:bg-opacity-10 group-active:bg-opacity-20"
+                ? "bg-secondaryContainer group-hover:bg-secondary group-hover:bg-opacity-30 group-active:bg-opacity-20"
                 : "group-hover:bg-onSurfaceVariant group-hover:bg-opacity-10 group-active:bg-opacity-20"
             )}
           >
             <span
               className={
-                isActive ? "text-onPrimaryContainer" : "text-onSurfaceVariant"
+                isActive ? "text-onSecondaryContainer" : "text-onSurfaceVariant"
               }
             >
-              {link}
+              {icon}
             </span>
           </div>
           <span

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-slider": "^1.1.2",
     "@reduxjs/toolkit": "^1.9.5",
     "class-variance-authority": "^0.5.3",
     "framer-motion": "^10.13.0",

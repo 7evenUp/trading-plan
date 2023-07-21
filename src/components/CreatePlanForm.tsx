@@ -12,6 +12,7 @@ import SegmentedButtonsContainer from "./SegmentedButtonsContainer"
 import Tooltip from "./Tooltip"
 import FilledTextField from "../shared/ui/FilledTextField"
 import Button from "../shared/ui/Button"
+import { Slider } from "../shared/ui/Slider"
 
 const TP_MAX = 3
 const DEFAULT_TP = 5
@@ -21,7 +22,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
   const [deposit, setDeposit] = useState("")
   const [goal, setGoal] = useState("")
   const [risk, setRisk] = useState("")
-  const [leverage, setLeverage] = useState("1")
+  const [leverage, setLeverage] = useState([1])
   const [tp, setTp] = useState("")
   const [isTPCreating, setIsTPCreating] = useState(false)
   const [tpArray, setTpArray] = useState<number[]>([])
@@ -39,7 +40,7 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
         deposit: parseInt(deposit),
         goal: parseInt(goal),
         risk: parseFloat(risk),
-        leverage: parseInt(leverage),
+        leverage: leverage[0],
         takeProfit: tpArray.length ? tpArray : [DEFAULT_TP],
       })
     )
@@ -112,13 +113,13 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
           <span className="text-onSurface font-medium text-base leading-6 tracking-[0.15px]">
             Leverage is {leverage}X
           </span>
-          <input
-            className="appearance-none bg-primaryContainer rounded-full h-1 w-full"
-            type="range"
+          <Slider
+            className="w-full"
+            value={leverage}
+            onValueChange={setLeverage}
             min={1}
             max={25}
-            value={leverage}
-            onChange={(evt) => setLeverage(evt.target.value)}
+            showLabel={false}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -184,7 +185,9 @@ const CreatePlanForm = ({ closeForm }: { closeForm: () => void }) => {
           )}
         </div>
 
-        <Button appearance="filled" onClick={onCreate} icon={<AddCircle />} >Create</Button>
+        <Button appearance="filled" onClick={onCreate} icon={<AddCircle />}>
+          Create
+        </Button>
       </form>
     </div>
   )
